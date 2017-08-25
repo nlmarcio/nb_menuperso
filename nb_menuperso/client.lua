@@ -1042,12 +1042,78 @@ Citizen.CreateThread(function()
 		end
 
 --------------------------------------------------------------------------------------------
+-- Menu police -> esx_policejob
+--------------------------------------------------------------------------------------------
+
+		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			TriggerEvent('nb:openMenuPolice')
+			GUI.Time = GetGameTimer()
+		end
+
+  	if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			GUI.Time = GetGameTimer()
+		end
+		
+--------------------------------------- MANETTE
+		
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			TriggerEvent('nb:openMenuPolice')
+			GUI.Time  = GetGameTimer()
+		end
+		
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			GUI.Time  = GetGameTimer()
+		end
+
+--------------------------------------------------------------------------------------------
+-- Menu ambulance -> esx_ambulancejob
+--------------------------------------------------------------------------------------------
+
+		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			TriggerEvent('nb:openMenuAmbulance')
+			GUI.Time = GetGameTimer()
+		end
+
+		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			GUI.Time = GetGameTimer()
+		end
+		
+--------------------------------------- MANETTE
+		
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			TriggerEvent('nb:openMenuAmbulance')
+			GUI.Time  = GetGameTimer()
+		end
+		
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			GUI.Time  = GetGameTimer()
+		end
+
+--------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
 	end
 end)
 
 RegisterNetEvent('nb:closeAllSubMenu')
 AddEventHandler('nb:closeAllSubMenu', function()
+	TriggerEvent('nb:closeMenuAmbulance')
+	TriggerEvent('nb:closeMenuPolice')
 	TriggerEvent('nb:closeMenuInventaire')
 	TriggerEvent('nb:closeMenuPersonnel')
 end)
