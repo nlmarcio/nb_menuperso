@@ -1,7 +1,9 @@
 # fxserver-nb_menuperso
 Menu personnel pour ESX<br>
 Un menu simple qui regroupe l'inventaire, les factures, le téléphone, les emotes et gestion lite des voitures<br>
-Il permet aussi une compatibilité manette accru. Pour ouvrir le menu personnel faite F5 ou X+Fleche du haut a la manette<br>
+Il permet aussi une compatibilité manette accru.<br>
+Pour ouvrir le menu personnel faite F5 ou X+Fleche du haut a la manette<br>
+Pour ouvrir le menu métier faite F6 ou X+Fleche du bas a la manette<br>
 Pour ouvrir l'inventaire depuis le clavier : Maj+G<br>
 Pour ouvrir le téléphone depuis le clavier : Maj+U<br>
 Pour ouvrir les factures depuis le clavier : Maj+Y<br>
@@ -10,6 +12,8 @@ Pour ouvrir les factures depuis le clavier : Maj+Y<br>
 https://github.com/indilo53/fivem-es_extended<br>
 https://github.com/FXServer-ESX/fxserver-esx_phone<br>
 https://github.com/FXServer-ESX/fxserver-esx_billing<br>
+https://github.com/FXServer-ESX/fxserver-esx_policejob<br>
+https://github.com/FXServer-ESX/fxserver-esx_ambulancejob<br>
 
 # INSTALLATION
 Copier le dossier "nb_menuperso" dans resources<br>
@@ -119,6 +123,62 @@ end)
 RegisterNetEvent('nb:closeMenuFactures')
 AddEventHandler('nb:closeMenuFactures', function()
 	TriggerEvent('nb:closeAllMenu')
+end)
+```
+Modifier le esx_policejob/client/main.lua pour commenter les lignes suivante :<br>
+```lua
+		if IsControlPressed(0,  Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'police_actions') and (GetGameTimer() - GUI.Time) > 150 then
+			OpenPoliceActionsMenu()
+			GUI.Time = GetGameTimer()
+		end
+```
+et ajouter ces lignes en fin de script :<br>
+```lua
+---------------------------------------------------------------------------------------------------------
+--NB : gestion des menu
+---------------------------------------------------------------------------------------------------------
+
+RegisterNetEvent('nb:openMenuPolice')
+AddEventHandler('nb:openMenuPolice', function()
+	OpenPoliceActionsMenu()
+end)
+
+RegisterNetEvent('nb:closeMenuPolice')
+AddEventHandler('nb:closeMenuPolice', function()
+	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'vehicle_interaction') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'vehicle_interaction')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'object_spawner') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'object_spawner')
+	end
+end)
+```
+Modifier le esx_policejob/client/main.lua pour commenter les lignes suivante :<br>
+```lua
+		if IsControlPressed(0,  Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and (GetGameTimer() - GUI.Time) > 150 then
+			OpenMobileAmbulanceActionsMenu()
+			GUI.Time = GetGameTimer()
+		end
+```
+et ajouter ces lignes en fin de script :<br>
+```lua
+---------------------------------------------------------------------------------------------------------
+--NB : gestion des menu
+---------------------------------------------------------------------------------------------------------
+
+RegisterNetEvent('nb:openMenuAmbulance')
+AddEventHandler('nb:openMenuAmbulance', function()
+	OpenMobileAmbulanceActionsMenu()
+end)
+
+RegisterNetEvent('nb:closeMenuAmbulance')
+AddEventHandler('nb:closeMenuAmbulance', function()
+	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
+	end
 end)
 ```
 # Attention : Ce script est optimisable et peut etre mis a jour a tout moment.
