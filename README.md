@@ -156,7 +156,7 @@ AddEventHandler('nb:closeMenuPolice', function()
 	end
 end)
 ```
-Modifier le esx_policejob/client/main.lua pour commenter les lignes suivante :<br>
+Modifier le esx_ambulancejob/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 		if IsControlPressed(0,  Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and (GetGameTimer() - GUI.Time) > 150 then
 			OpenMobileAmbulanceActionsMenu()
