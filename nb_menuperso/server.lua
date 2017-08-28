@@ -112,10 +112,16 @@ AddEventHandler('esx:virerplayer', function(target)
 	local job = "unemployed"
 	local grade = "0"
 
+	if(sourceXPlayer.job.name == targetXPlayer.job.name)then
 		targetXPlayer.setJob(job, grade)
 
 		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~viré "..targetXPlayer.name.."~w~.")
-		TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~viré par".. sourceXPlayer.name.."~w~.")		
+		TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~viré par".. sourceXPlayer.name.."~w~.")	
+	else
+
+		TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas ~r~l'autorisation~w~.")
+
+	end	
 
 
 end)
