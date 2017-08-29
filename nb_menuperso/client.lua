@@ -50,6 +50,8 @@ function OpenPersonnelMenu()
 		table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
 		table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
 		table.insert(elements, {label = 'Grade',			value = 'menuperso_grade'})
+
+		
 		ESX.UI.Menu.Open(
 			'default', GetCurrentResourceName(), 'menu_perso',
 			{
@@ -66,7 +68,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Téléphone',    							value = 'menuperso_moi_telephone'})
 					table.insert(elements, {label = 'Inventaire',             					value = 'menuperso_moi_inventaire'})
 					table.insert(elements, {label = 'Mes factures',							value = 'menuperso_moi_factures'})
-					
+						
 					ESX.UI.Menu.Open(
 						
 						'default', GetCurrentResourceName(), 'menuperso_moi',
@@ -88,8 +90,6 @@ function OpenPersonnelMenu()
 							if data2.current.value == 'menuperso_moi_factures' then
 								openFacture()
 							end
-
-
 
 							
 						end,
@@ -596,6 +596,7 @@ function OpenPersonnelMenu()
 
 				end
 
+
 				if data.current.value == 'menuperso_gpsrapide' then
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_gpsrapide',
@@ -647,7 +648,18 @@ function OpenPersonnelMenu()
 					)
 
 				end
-				
+
+
+
+
+
+
+
+
+
+
+
+
 				if data.current.value == 'menuperso_grade' then
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_grade',
@@ -741,15 +753,8 @@ function OpenPersonnelMenu()
 							menu2.close()
 						end
 					)
-
-				end
-
-
-
-
-
-
-
+				end			
+				
 				
 			end,
 			function(data, menu)
@@ -777,11 +782,6 @@ function openFacture()
 	TriggerEvent('nb:closeAllMenu')
 	TriggerEvent('nb:openMenuFactures')
 end
-
-
-
-l
-
 
 ---------------------------------------------------------------------------Actions
 
@@ -1056,6 +1056,8 @@ AddEventHandler('nb:closeMenuPersonnel', function()
 		
 	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_gpsrapide') then
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_gpsrapide')
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_grade') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_grade')	
 		
 	end
 end)
@@ -1216,13 +1218,74 @@ Citizen.CreateThread(function()
 
 --------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------------------
+-- Menu Mecano -> esx_mecanojob
+--------------------------------------------------------------------------------------------
+
+		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			TriggerEvent('nb:openMenuMecano')
+			GUI.Time = GetGameTimer()
+		end
+
+  	if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			GUI.Time = GetGameTimer()
+		end
+		
+--------------------------------------- MANETTE
+		
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			TriggerEvent('nb:openMenuMecano')
+			GUI.Time  = GetGameTimer()
+		end
+		
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('nb:closeAllSubMenu')
+			TriggerEvent('nb:closeAllMenu')
+			GUI.Time  = GetGameTimer()
+		end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	end
 end)
+
+
 
 RegisterNetEvent('nb:closeAllSubMenu')
 AddEventHandler('nb:closeAllSubMenu', function()
 	TriggerEvent('nb:closeMenuAmbulance')
 	TriggerEvent('nb:closeMenuPolice')
+	TriggerEvent('nb:closeMenuMecano')
 	TriggerEvent('nb:closeMenuInventaire')
 	TriggerEvent('nb:closeMenuPersonnel')
 end)
