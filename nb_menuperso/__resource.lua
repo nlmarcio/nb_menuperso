@@ -5,3 +5,8 @@ description "Menu Perso No Brain"
 -- nb_menuperso
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
 client_script 'client.lua'
+server_scripts {
+	'@mysql-async/lib/MySQL.lua',
+	'@es_extended/locale.lua',
+	'server.lua'
+}

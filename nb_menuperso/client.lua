@@ -49,7 +49,7 @@ function OpenPersonnelMenu()
 		table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
 		table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
 		table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-		
+		table.insert(elements, {label = 'Grade',			value = 'menuperso_grade'})
 		ESX.UI.Menu.Open(
 			'default', GetCurrentResourceName(), 'menu_perso',
 			{
@@ -66,7 +66,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Téléphone',    							value = 'menuperso_moi_telephone'})
 					table.insert(elements, {label = 'Inventaire',             					value = 'menuperso_moi_inventaire'})
 					table.insert(elements, {label = 'Mes factures',							value = 'menuperso_moi_factures'})
-						
+					
 					ESX.UI.Menu.Open(
 						
 						'default', GetCurrentResourceName(), 'menuperso_moi',
@@ -88,6 +88,8 @@ function OpenPersonnelMenu()
 							if data2.current.value == 'menuperso_moi_factures' then
 								openFacture()
 							end
+
+
 
 							
 						end,
@@ -646,6 +648,108 @@ function OpenPersonnelMenu()
 
 				end
 				
+				if data.current.value == 'menuperso_grade' then
+					ESX.UI.Menu.Open(
+						'default', GetCurrentResourceName(), 'menuperso_grade',
+						{
+							title    = 'Grade',
+							align    = 'top-left',
+							elements = {
+								{label = 'Recruter',     value = 'menuperso_grade_recruter'},
+								{label = 'Virer',              value = 'menuperso_grade_virer'},
+								{label = 'Promouvoir', value = 'menuperso_grade_promouvoir'},
+								{label = 'Destituer',  value = 'menuperso_grade_destituer'}
+							},
+						},
+						function(data2, menu2)
+
+							if data2.current.value == 'menuperso_grade_recruter' then
+								if PlayerData.job.grade_name == 'boss' then
+										local job =  PlayerData.job.name
+										local grade = 0
+										local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+									if closestPlayer == -1 or closestDistance > 3.0 then
+										ESX.ShowNotification("Aucun joueur à proximité")
+									else
+										TriggerServerEvent('esx:recruterplayer', GetPlayerServerId(closestPlayer), job,grade)
+									end
+
+								else
+									Notify("Vous n'avez pas les ~r~droits~w~.")
+
+								end
+								
+							end
+
+							if data2.current.value == 'menuperso_grade_virer' then
+								if PlayerData.job.grade_name == 'boss' then
+										local job =  PlayerData.job.name
+										local grade = 0
+										local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+									if closestPlayer == -1 or closestDistance > 3.0 then
+										ESX.ShowNotification("Aucun joueur à proximité")
+									else
+										TriggerServerEvent('esx:virerplayer', GetPlayerServerId(closestPlayer))
+									end
+
+								else
+									Notify("Vous n'avez pas les ~r~droits~w~.")
+
+								end
+								
+							end
+
+							if data2.current.value == 'menuperso_grade_promouvoir' then
+
+								if PlayerData.job.grade_name == 'boss' then
+										local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+									if closestPlayer == -1 or closestDistance > 3.0 then
+										ESX.ShowNotification("Aucun joueur à proximité")
+									else
+										TriggerServerEvent('esx:promouvoirplayer', GetPlayerServerId(closestPlayer))
+									end
+
+								else
+									Notify("Vous n'avez pas les ~r~droits~w~.")
+
+								end
+								
+								
+							end
+
+							if data2.current.value == 'menuperso_grade_destituer' then
+
+								if PlayerData.job.grade_name == 'boss' then
+										local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
+									if closestPlayer == -1 or closestDistance > 3.0 then
+										ESX.ShowNotification("Aucun joueur à proximité")
+									else
+										TriggerServerEvent('esx:destituerplayer', GetPlayerServerId(closestPlayer))
+									end
+
+								else
+									Notify("Vous n'avez pas les ~r~droits~w~.")
+
+								end
+								
+								
+							end
+
+							
+						end,
+						function(data2, menu2)
+							menu2.close()
+						end
+					)
+
+				end
+
+
+
+
+
+
+
 				
 			end,
 			function(data, menu)
@@ -673,6 +777,11 @@ function openFacture()
 	TriggerEvent('nb:closeAllMenu')
 	TriggerEvent('nb:openMenuFactures')
 end
+
+
+
+l
+
 
 ---------------------------------------------------------------------------Actions
 
