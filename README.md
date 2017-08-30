@@ -181,4 +181,34 @@ AddEventHandler('nb:closeMenuAmbulance', function()
 	end
 end)
 ```
+
+
+Modifier le esx_mecanojob/client/main.lua commenter les lignes suivantes : 
+```lua
+	if IsControlJustReleased(0, Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
+            OpenMobileMecanoActionsMenu()
+        end
+```
+
+et ajouter ces lignes en fin de script : 
+
+```lua
+---------------------------------------------------------------------------------------------------------
+--NB : gestion des menu
+---------------------------------------------------------------------------------------------------------
+
+RegisterNetEvent('nb:openMenuMecano')
+AddEventHandler('nb:openMenuMecano', function()
+	OpenMobileMecanoActionsMenu()
+end)
+
+RegisterNetEvent('nb:closeMenuMecano')
+AddEventHandler('nb:closeMenuMecano', function()
+	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
+	end
+end)
+
+```
+
 # Attention : Ce script est optimisable et peut etre mis a jour a tout moment.
