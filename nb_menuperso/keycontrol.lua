@@ -16,19 +16,19 @@ GUI.Time							= 0
 local PlayerData				= {}
 local NBMenuIsOpen		= false
 
-RegisterNetEvent('NB:playerLoaded')
-AddEventHandler('NB:playerLoaded', function(xPlayer)
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
   PlayerData = xPlayer 
 end)
 
-RegisterNetEvent('NB:setJob')
-AddEventHandler('NB:setJob', function(job)
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
   PlayerData.job = job
 end)
 
 Citizen.CreateThread(function()
     while ESX == nil do
-        TriggerEvent('NB:getSharedObject', function(obj) ESX = obj end)
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
         Citizen.Wait(0)
     end
 end)
@@ -327,7 +327,7 @@ Citizen.CreateThread(function()
 			local active = true 
 			------------------------------------------------------------------------ TOUCHES CLAVIER
 			--DisableControlAction(0, Keys["ESC"], active) -- ESC - 322
-			--DisableControlAction(0, Keys["²"], active) -- ² - 243
+			--DisableControlAction(0, Keys["Â²"], active) -- Â² - 243
 			--DisableControlAction(0, Keys["TAB"], active) -- TAB - 37
 			--DisableControlAction(0, Keys["LEFTCTRL"], active) -- LEFTCTRL - 36
 			--DisableControlAction(0, Keys["RIGHTCTRL"], active) -- RIGHTCTRL - 70
@@ -343,7 +343,7 @@ Citizen.CreateThread(function()
 			--DisableControlAction(0, Keys["^"], active) -- ^ - 39
 			--DisableControlAction(0, Keys["$"], active) -- $ - 40
 			--DisableControlAction(0, Keys["ENTER"], active) -- ENTER - 18
-			--DisableControlAction(0, Keys["ù"], active) -- ù - NON IDENTIFIER
+			--DisableControlAction(0, Keys["Ã¹"], active) -- Ã¹ - NON IDENTIFIER
 			--DisableControlAction(0, Keys["*"], active) -- * - NON IDENTIFIER
 			--DisableControlAction(0, Keys[","], active) -- , - 82
 			--DisableControlAction(0, Keys[";"], active) -- ; - 81
