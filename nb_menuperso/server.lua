@@ -2,6 +2,12 @@ ESX = nil
 
 TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
 
+ESX.RegisterServerCallback('NB:getUsergroup', function(source, cb)
+  local xPlayer = ESX.GetPlayerFromId(source)
+  local group = xPlayer.getGroup()
+  cb(group)
+end)
+
 function getMaximumGrade(jobname)
     local result = MySQL.Sync.fetchAll("SELECT * FROM job_grades WHERE job_name=@jobname  ORDER BY `grade` DESC ;", {
         ['@jobname'] = jobname
@@ -12,10 +18,62 @@ function getMaximumGrade(jobname)
     return nil
 end
 
+-------------------------------------------------------------------------------Admin Menu
 
+RegisterServerEvent("AdminMenu:giveCash")
+AddEventHandler("AdminMenu:giveCash", function(money)
 
-RegisterServerEvent('esx:promouvoirplayer')
-AddEventHandler('esx:promouvoirplayer', function(target)
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+	local total = money
+	
+	xPlayer.addMoney((total))
+	local item = ' $ d\'argent !'
+	local message = 'Tu t\'est GIVE '
+	TriggerClientEvent('esx:showNotification', _source, message" "..total.." "..item)
+
+end)
+
+RegisterServerEvent("AdminMenu:giveBank")
+AddEventHandler("AdminMenu:giveBank", function(money)
+
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+	local total = money
+	
+	xPlayer.addAccountMoney('bank', total)
+	local item = ' $ d\'argent en Banque !'
+	local message = 'Tu t\'est GIVE '
+	TriggerClientEvent('esx:showNotification', _source, message" "..total.." "..item)
+
+end)
+
+RegisterServerEvent("AdminMenu:giveDirtyMoney")
+AddEventHandler("AdminMenu:giveDirtyMoney", function(money)
+
+	local _source = source
+	local xPlayer = ESX.GetPlayerFromId(_source)
+	local total = money
+	
+	xPlayer.addAccountMoney('black_money', total)
+	local item = ' $ d\'argent sale !'
+	local message = 'Tu t\'est GIVE '
+	TriggerClientEvent('esx:showNotification', _source, message" "..total.." "..item)
+
+end)
+
+RegisterServerEvent('NB:test')
+AddEventHandler('NB:test', function()
+
+	local currentDatetime = os.date("%A %Y-%m-%d %H:%M:%S")
+	
+	TriggerClientEvent( 'NB:testretour', source, currentDatetime)	
+	
+end)
+
+-------------------------------------------------------------------------------Grade Menu
+RegisterServerEvent('NB:promouvoirplayer')
+AddEventHandler('NB:promouvoirplayer', function(target)
 
 	local _source = source
 
@@ -34,21 +92,19 @@ AddEventHandler('esx:promouvoirplayer', function(target)
 			targetXPlayer.setJob(job, grade)
 
 			TriggerClientEvent('esx:showNotification', _source, "Vous avez ~g~promu "..targetXPlayer.name.."~w~.")
-			TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~g~promu par".. sourceXPlayer.name.."~w~.")		
+			TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~promu par".. sourceXPlayer.name.."~w~.")		
 
 		else
 			TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas ~r~l'autorisation~w~.")
 
 		end
 
-
 	end 
 		
 end)
 
-
-RegisterServerEvent('esx:destituerplayer')
-AddEventHandler('esx:destituerplayer', function(target)
+RegisterServerEvent('NB:destituerplayer')
+AddEventHandler('NB:destituerplayer', function(target)
 
 	local _source = source
 
@@ -56,7 +112,7 @@ AddEventHandler('esx:destituerplayer', function(target)
 	local targetXPlayer = ESX.GetPlayerFromId(target)
 
 	if(targetXPlayer.job.grade == 0)then
-		TriggerClientEvent('esx:showNotification', _source, "Vous ne pouvez pas plus ~r~rÃ©trograder~w~.")
+		TriggerClientEvent('esx:showNotification', _source, "Vous ne pouvez pas plus ~r~rétrograder~w~.")
 	else
 		if(sourceXPlayer.job.name == targetXPlayer.job.name)then
 
@@ -65,29 +121,20 @@ AddEventHandler('esx:destituerplayer', function(target)
 
 			targetXPlayer.setJob(job, grade)
 
-			TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~rÃ©trogradÃ© "..targetXPlayer.name.."~w~.")
-			TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~r~rÃ©trogradÃ© par".. sourceXPlayer.name.."~w~.")		
+			TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~rétrogradé "..targetXPlayer.name.."~w~.")
+			TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~r~rétrogradé par".. sourceXPlayer.name.."~w~.")		
 
 		else
 			TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas ~r~l'autorisation~w~.")
 
 		end
 
-
 	end 
 		
 end)
 
-
-
-
-
-
-
-
-
-RegisterServerEvent('esx:recruterplayer')
-AddEventHandler('esx:recruterplayer', function(target, job, grade)
+RegisterServerEvent('NB:recruterplayer')
+AddEventHandler('NB:recruterplayer', function(target, job, grade)
 
 	local _source = source
 
@@ -96,9 +143,8 @@ AddEventHandler('esx:recruterplayer', function(target, job, grade)
 	
 		targetXPlayer.setJob(job, grade)
 
-		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~g~recrutÃ© "..targetXPlayer.name.."~w~.")
-		TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~g~embauchÃ© par".. sourceXPlayer.name.."~w~.")		
-
+		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~g~recruté "..targetXPlayer.name.."~w~.")
+		TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~embauché par".. sourceXPlayer.name.."~w~.")		
 
 end)
 
@@ -115,13 +161,12 @@ AddEventHandler('esx:virerplayer', function(target)
 	if(sourceXPlayer.job.name == targetXPlayer.job.name)then
 		targetXPlayer.setJob(job, grade)
 
-		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~virÃ© "..targetXPlayer.name.."~w~.")
-		TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~g~virÃ© par".. sourceXPlayer.name.."~w~.")	
+		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~viré "..targetXPlayer.name.."~w~.")
+		TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~viré par".. sourceXPlayer.name.."~w~.")	
 	else
 
 		TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas ~r~l'autorisation~w~.")
 
-	end	
-
+	end
 
 end)

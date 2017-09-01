@@ -1,55 +1,30 @@
-# fxserver-nb_menuperso
+# nb_menuperso
 Menu personnel pour ESX<br>
-Un menu simple qui regroupe l'inventaire, les factures, le téléphone, les emotes et gestion lite des voitures<br>
+Un menu simple qui regroupe l'inventaire, les factures, le téléphone, les emotes, une gestion lite des véhicules et un menu admin<br>
 Il permet aussi une compatibilité manette accru.<br>
 Pour ouvrir le menu personnel faite F5 ou X+Fleche du haut a la manette<br>
 Pour ouvrir le menu métier faite F6 ou X+Fleche du bas a la manette<br>
 Pour ouvrir l'inventaire depuis le clavier : Maj+G<br>
 Pour ouvrir le téléphone depuis le clavier : Maj+U<br>
 Pour ouvrir les factures depuis le clavier : Maj+Y<br>
+Pour les admin/owner se TP sur le marker sur la map : Maj+E<br>
 
-# NECESSAIRE
+## NECESSAIRE
 https://github.com/indilo53/fivem-es_extended<br>
 https://github.com/FXServer-ESX/fxserver-esx_phone<br>
 https://github.com/FXServer-ESX/fxserver-esx_billing<br>
 https://github.com/FXServer-ESX/fxserver-esx_policejob<br>
 https://github.com/FXServer-ESX/fxserver-esx_ambulancejob<br>
+https://github.com/FXServer-ESX/fxserver-esx_mecanojob<br>
 
-# INSTALLATION
+## INSTALLATION
 Copier le dossier "nb_menuperso" dans resources<br>
 Ajouter "start nb_menuperso" dans votre serveur.cfg<br>
-<br>
-Modifier le esx_phone/client/main.lua pour commenter les lignes suivante :<br>
-```lua
-    else
 
-      if IsControlPressed(0, Keys['F1']) and (GetGameTimer() - GUI.Time) > 150 then
-
-        if not ESX.UI.Menu.IsOpen('phone', GetCurrentResourceName(), 'main') then
-        	ESX.UI.Menu.CloseAll()
-        	ESX.UI.Menu.Open('phone', GetCurrentResourceName(), 'main')
-        end
-
-        GUI.Time = GetGameTimer()
-
-      end
-```
-et ajouter ces lignes en fin de script :<br>
-```lua
----------------------------------------------------------------------------------------------------------
---NB : gestion des menu
----------------------------------------------------------------------------------------------------------
-
-RegisterNetEvent('nb:openMenuTelephone')
-AddEventHandler('nb:openMenuTelephone', function()
-	ESX.UI.Menu.Open('phone', GetCurrentResourceName(), 'main')
-end)
-
-RegisterNetEvent('nb:closeMenuTelephone')
-AddEventHandler('nb:closeMenuTelephone', function()
-	TriggerEvent('nb:closeAllMenu')
-end)
-```
+## Lignes a modifier dans d'autres scripts
+__####################__
+__Dans es_extended :__
+__####################__
 Modifier le es_extended/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 -- Menu interactions
@@ -66,19 +41,37 @@ Citizen.CreateThread(function()
   end
 end)
 ```
-et ajouter ces lignes en fin de script :<br>
+et les lignes :<br>
+```lua
+-- Pause menu disable HUD display
+Citizen.CreateThread(function()
+	while true do
+    Citizen.Wait(1)
+    if IsPauseMenuActive() and not IsPaused then
+      IsPaused = true
+      TriggerEvent('es:setMoneyDisplay', 0.0)
+      ESX.UI.HUD.SetDisplay(0.0)     
+    elseif not IsPauseMenuActive() and IsPaused then
+      IsPaused = false
+      TriggerEvent('es:setMoneyDisplay', 1.0)
+      ESX.UI.HUD.SetDisplay(1.0)    
+    end
+  end
+end)
+```
+puis ajouter ces lignes en fin de script :<br>
 ```lua
 ---------------------------------------------------------------------------------------------------------
 --NB : gestion des menu
 ---------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('nb:openMenuInventaire')
-AddEventHandler('nb:openMenuInventaire', function()
+RegisterNetEvent('NB:openMenuInventaire')
+AddEventHandler('NB:openMenuInventaire', function()
 	ESX.ShowInventory()
 end)
 
-RegisterNetEvent('nb:closeMenuInventaire')
-AddEventHandler('nb:closeMenuInventaire', function()
+RegisterNetEvent('NB:closeMenuInventaire')
+AddEventHandler('NB:closeMenuInventaire', function()
 	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'inventory') then
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'inventory')
 		
@@ -93,6 +86,43 @@ AddEventHandler('nb:closeMenuInventaire', function()
 	end
 end)
 ```
+__####################__
+__Dans esx_phone :__
+__####################__
+Modifier le esx_phone/client/main.lua pour commenter les lignes suivante :<br>
+```lua
+    else
+
+      if IsControlPressed(0, Keys['F1']) and (GetGameTimer() - GUI.Time) > 150 then
+
+        if not ESX.UI.Menu.IsOpen('phone', GetCurrentResourceName(), 'main') then
+        	ESX.UI.Menu.CloseAll()
+        	ESX.UI.Menu.Open('phone', GetCurrentResourceName(), 'main')
+        end
+
+        GUI.Time = GetGameTimer()
+
+      end
+```
+puis ajouter ces lignes en fin de script :<br>
+```lua
+---------------------------------------------------------------------------------------------------------
+--NB : gestion des menu
+---------------------------------------------------------------------------------------------------------
+
+RegisterNetEvent('NB:openMenuTelephone')
+AddEventHandler('NB:openMenuTelephone', function()
+	ESX.UI.Menu.Open('phone', GetCurrentResourceName(), 'main')
+end)
+
+RegisterNetEvent('NB:closeMenuTelephone')
+AddEventHandler('NB:closeMenuTelephone', function()
+	TriggerEvent('NB:closeAllMenu')
+end)
+```
+__####################__
+__Dans esx_billing :__
+__####################__
 Modifier le esx_billing/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 --Key controls
@@ -109,22 +139,25 @@ Citizen.CreateThread(function()
   end
 end)
 ```
-et ajouter ces lignes en fin de script :<br>
+puis ajouter ces lignes en fin de script :<br>
 ```lua
 ---------------------------------------------------------------------------------------------------------
 --NB : gestion des menu
 ---------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('nb:openMenuFactures')
-AddEventHandler('nb:openMenuFactures', function()
+RegisterNetEvent('NB:openMenuFactures')
+AddEventHandler('NB:openMenuFactures', function()
   	ShowBillsMenu()
 end)
 
-RegisterNetEvent('nb:closeMenuFactures')
-AddEventHandler('nb:closeMenuFactures', function()
-	TriggerEvent('nb:closeAllMenu')
+RegisterNetEvent('NB:closeMenuFactures')
+AddEventHandler('NB:closeMenuFactures', function()
+	TriggerEvent('NB:closeAllMenu')
 end)
 ```
+__####################__
+__Dans esx_policejob :__
+__####################__
 Modifier le esx_policejob/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 		if IsControlPressed(0,  Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'police_actions') and (GetGameTimer() - GUI.Time) > 150 then
@@ -132,19 +165,19 @@ Modifier le esx_policejob/client/main.lua pour commenter les lignes suivante :<b
 			GUI.Time = GetGameTimer()
 		end
 ```
-et ajouter ces lignes en fin de script :<br>
+puis ajouter ces lignes en fin de script :<br>
 ```lua
 ---------------------------------------------------------------------------------------------------------
 --NB : gestion des menu
 ---------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('nb:openMenuPolice')
-AddEventHandler('nb:openMenuPolice', function()
+RegisterNetEvent('NB:openMenuPolice')
+AddEventHandler('NB:openMenuPolice', function()
 	OpenPoliceActionsMenu()
 end)
 
-RegisterNetEvent('nb:closeMenuPolice')
-AddEventHandler('nb:closeMenuPolice', function()
+RegisterNetEvent('NB:closeMenuPolice')
+AddEventHandler('NB:closeMenuPolice', function()
 	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
 		
@@ -156,6 +189,9 @@ AddEventHandler('nb:closeMenuPolice', function()
 	end
 end)
 ```
+__####################__
+__Dans esx_ambulancejob :__
+__####################__
 Modifier le esx_ambulancejob/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 		if IsControlPressed(0,  Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and (GetGameTimer() - GUI.Time) > 150 then
@@ -163,52 +199,49 @@ Modifier le esx_ambulancejob/client/main.lua pour commenter les lignes suivante 
 			GUI.Time = GetGameTimer()
 		end
 ```
-et ajouter ces lignes en fin de script :<br>
+puis ajouter ces lignes en fin de script :<br>
 ```lua
 ---------------------------------------------------------------------------------------------------------
 --NB : gestion des menu
 ---------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('nb:openMenuAmbulance')
-AddEventHandler('nb:openMenuAmbulance', function()
+RegisterNetEvent('NB:openMenuAmbulance')
+AddEventHandler('NB:openMenuAmbulance', function()
 	OpenMobileAmbulanceActionsMenu()
 end)
 
-RegisterNetEvent('nb:closeMenuAmbulance')
-AddEventHandler('nb:closeMenuAmbulance', function()
+RegisterNetEvent('NB:closeMenuAmbulance')
+AddEventHandler('NB:closeMenuAmbulance', function()
 	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
 	end
 end)
 ```
-
-
+__####################__
+__Dans esx_mecanojob :__
+__####################__
 Modifier le esx_mecanojob/client/main.lua commenter les lignes suivantes : 
 ```lua
 	if IsControlJustReleased(0, Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
             OpenMobileMecanoActionsMenu()
         end
 ```
-
-et ajouter ces lignes en fin de script : 
-
+puis ajouter ces lignes en fin de script : 
 ```lua
 ---------------------------------------------------------------------------------------------------------
 --NB : gestion des menu
 ---------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('nb:openMenuMecano')
-AddEventHandler('nb:openMenuMecano', function()
+RegisterNetEvent('NB:openMenuMecano')
+AddEventHandler('NB:openMenuMecano', function()
 	OpenMobileMecanoActionsMenu()
 end)
 
-RegisterNetEvent('nb:closeMenuMecano')
-AddEventHandler('nb:closeMenuMecano', function()
+RegisterNetEvent('NB:closeMenuMecano')
+AddEventHandler('NB:closeMenuMecano', function()
 	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
 	end
 end)
-
 ```
-
-# Attention : Ce script est optimisable et peut etre mis a jour a tout moment.
+## Attention : Ce script est optimisable et peut etre mis a jour a tout moment.

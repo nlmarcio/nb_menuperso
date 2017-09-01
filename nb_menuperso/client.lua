@@ -39,18 +39,125 @@ function Notify(text)
     DrawNotification(false, true)
 end
 
+--Message text joueur
+function Text(text)
+		SetTextColour(186, 186, 186, 255)
+		SetTextFont(0)
+		SetTextScale(0.378, 0.378)
+		SetTextWrap(0.0, 1.0)
+		SetTextCentre(false)
+		SetTextDropshadow(0, 0, 0, 0, 255)
+		SetTextEdge(1, 0, 0, 0, 205)
+		SetTextEntry("STRING")
+		AddTextComponentString(text)
+		DrawText(0.017, 0.977)
+end
+
+etatGPS = false
+etatPHONE = false
+
 function OpenPersonnelMenu()
-		
+	
+	TriggerServerEvent("NB:VerifPlayerGpsMenuPerso")
+	TriggerServerEvent("NB:VerifPlayerPhoneMenuPerso")
+	
+	RegisterNetEvent("NB:RetourPlayerGpsMenuPersoOK")
+	AddEventHandler("NB:RetourPlayerGpsMenuPersoOK", function(source)
+		etatGPS = true
+	end)
+
+	RegisterNetEvent("NB:RetourPlayerGpsMenuPersoNOP")
+	AddEventHandler("NB:RetourPlayerGpsMenuPersoNOP", function(source)
+		etatGPS = false
+	end)
+
+	RegisterNetEvent("NB:RetourPlayerPhoneMenuPersoOK")
+	AddEventHandler("NB:RetourPlayerPhoneMenuPersoOK", function(source)
+		etatPHONE = true
+	end)
+
+	RegisterNetEvent("NB:RetourPlayerPhoneMenuPersoNOP")
+	AddEventHandler("NB:RetourPlayerPhoneMenuPersoNOP", function(source)
+		etatPHONE = false
+	end)
+	
 	ESX.UI.Menu.CloseAll()
+	
+	ESX.TriggerServerCallback('NB:getUsergroup', function(group)
+		playergroup = group
 		
 		local elements = {}
 		
-		table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
-		table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
-		table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
-		table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-		table.insert(elements, {label = 'Grade',			value = 'menuperso_grade'})
-
+		if playergroup == 'user' then
+			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
+			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
+			if (IsInVehicle()) then
+				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
+				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
+					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
+				end
+			end
+			if etatGPS then
+				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
+			end
+			if PlayerData.job.grade_name == 'boss' then
+				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
+			end
+		end
+		
+		if playergroup == 'mod' then
+			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
+			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
+			if (IsInVehicle()) then
+				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
+				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
+					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
+				end
+			end
+			if etatGPS then
+				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
+			end
+			if PlayerData.job.grade_name == 'boss' then
+				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
+			end
+			table.insert(elements, {label = 'Modération',				value = 'menuperso_modo'})
+		end
+		
+		if playergroup == 'admin' then
+			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
+			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
+			if (IsInVehicle()) then
+				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
+				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
+					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
+				end
+			end
+			if etatGPS then
+				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
+			end
+			if PlayerData.job.grade_name == 'boss' then
+				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
+			end
+			table.insert(elements, {label = 'Modération',				value = 'menuperso_modo'})
+		end
+		
+		if playergroup == 'owner' then
+			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
+			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
+			if (IsInVehicle()) then
+				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
+				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
+					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
+				end
+			end
+			if etatGPS then
+				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
+			end
+			if PlayerData.job.grade_name == 'boss' then
+				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
+			end
+			table.insert(elements, {label = 'Modération',				value = 'menuperso_modo'})
+		end
 		
 		ESX.UI.Menu.Open(
 			'default', GetCurrentResourceName(), 'menu_perso',
@@ -60,12 +167,182 @@ function OpenPersonnelMenu()
 				elements = elements
 			},
 			function(data, menu)
+	
+				local elements = {}
+				
+				if playergroup == 'mod' then
+					table.insert(elements, {label = 'TP sur joueur',    							value = 'menuperso_modo_tp_toplayer'})
+					table.insert(elements, {label = 'TP joueur sur moi',             			value = 'menuperso_modo_tp_playertome'})
+					--table.insert(elements, {label = 'TP sur coordonées [WIP]',						value = 'menuperso_modo_tp_pos'})
+					--table.insert(elements, {label = 'No Clip',										value = 'menuperso_modo_no_clip'})
+					--table.insert(elements, {label = 'GodMode',									value = 'menuperso_modo_godmode'})
+					--table.insert(elements, {label = 'Mode fantôme',								value = 'menuperso_modo_mode_fantome'})
+					--table.insert(elements, {label = 'Réparer véhicule',							value = 'menuperso_modo_vehicle_repair'})
+					--table.insert(elements, {label = 'Spawn véhicule',							value = 'menuperso_modo_vehicle_spawn'})
+					--table.insert(elements, {label = 'Flip véhicule',								value = 'menuperso_modo_vehicle_flip'})
+					-- table.insert(elements, {label = 'Se give des $ argent',						value = 'menuperso_modo_give_money'})
+					-- table.insert(elements, {label = 'Se give des $ en banque',						value = 'menuperso_modo_give_moneybank'})
+					-- table.insert(elements, {label = 'Se give des $ argent sale',						value = 'menuperso_modo_give_moneydirty'})
+					table.insert(elements, {label = 'Afficher/Cacher Coordonnées',		value = 'menuperso_modo_showcoord'})
+					table.insert(elements, {label = 'Afficher/Cacher nom des joueurs',	value = 'menuperso_modo_showname'})
+					--table.insert(elements, {label = 'TP sur le marker',							value = 'menuperso_modo_tp_marcker'})
+					--table.insert(elements, {label = 'Soigner la personne',					value = 'menuperso_modo_heal_player'})
+					--table.insert(elements, {label = 'Spéc la personne [WIP]',						value = 'menuperso_modo_spec_player'})
+					--table.insert(elements, {label = 'Changer Skin',									value = 'menuperso_modo_changer_skin'})
+					--table.insert(elements, {label = 'Save Skin',									value = 'menuperso_modo_save_skin'})
+					
+					
+				end
+			
+				if playergroup == 'admin' then
+					table.insert(elements, {label = 'TP sur joueur',    							value = 'menuperso_modo_tp_toplayer'})
+					table.insert(elements, {label = 'TP joueur sur moi',             			value = 'menuperso_modo_tp_playertome'})
+					--table.insert(elements, {label = 'TP sur coordonées [WIP]',						value = 'menuperso_modo_tp_pos'})
+					table.insert(elements, {label = 'No Clip',										value = 'menuperso_modo_no_clip'})
+					table.insert(elements, {label = 'GodMode',									value = 'menuperso_modo_godmode'})
+					table.insert(elements, {label = 'Mode fantôme',								value = 'menuperso_modo_mode_fantome'})
+					table.insert(elements, {label = 'Réparer véhicule',							value = 'menuperso_modo_vehicle_repair'})
+					table.insert(elements, {label = 'Spawn véhicule',							value = 'menuperso_modo_vehicle_spawn'})
+					table.insert(elements, {label = 'Flip véhicule',								value = 'menuperso_modo_vehicle_flip'})
+					table.insert(elements, {label = 'Se give des $ argent',						value = 'menuperso_modo_give_money'})
+					table.insert(elements, {label = 'Se give des $ en banque',						value = 'menuperso_modo_give_moneybank'})
+					table.insert(elements, {label = 'Se give des $ argent sale',						value = 'menuperso_modo_give_moneydirty'})
+					table.insert(elements, {label = 'Afficher/Cacher Coordonnées',		value = 'menuperso_modo_showcoord'})
+					table.insert(elements, {label = 'Afficher/Cacher nom des joueurs',	value = 'menuperso_modo_showname'})
+					table.insert(elements, {label = 'TP sur le marker',							value = 'menuperso_modo_tp_marcker'})
+					table.insert(elements, {label = 'Soigner la personne',					value = 'menuperso_modo_heal_player'})
+					--table.insert(elements, {label = 'Spéc la personne [WIP]',						value = 'menuperso_modo_spec_player'})
+					table.insert(elements, {label = 'Changer Skin',									value = 'menuperso_modo_changer_skin'})
+					table.insert(elements, {label = 'Save Skin',									value = 'menuperso_modo_save_skin'})
+				end
+			
+				if playergroup == 'owner' then
+					table.insert(elements, {label = 'TP sur joueur',    							value = 'menuperso_modo_tp_toplayer'})
+					table.insert(elements, {label = 'TP joueur sur moi',             			value = 'menuperso_modo_tp_playertome'})
+					table.insert(elements, {label = 'TP sur coordonées [WIP]',						value = 'menuperso_modo_tp_pos'})
+					table.insert(elements, {label = 'No Clip',										value = 'menuperso_modo_no_clip'})
+					table.insert(elements, {label = 'GodMode',									value = 'menuperso_modo_godmode'})
+					table.insert(elements, {label = 'Mode fantôme',								value = 'menuperso_modo_mode_fantome'})
+					table.insert(elements, {label = 'Réparer véhicule',							value = 'menuperso_modo_vehicle_repair'})
+					table.insert(elements, {label = 'Spawn véhicule',							value = 'menuperso_modo_vehicle_spawn'})
+					table.insert(elements, {label = 'Flip véhicule',								value = 'menuperso_modo_vehicle_flip'})
+					table.insert(elements, {label = 'Se give des $ argent',						value = 'menuperso_modo_give_money'})
+					table.insert(elements, {label = 'Se give des $ en banque',						value = 'menuperso_modo_give_moneybank'})
+					table.insert(elements, {label = 'Se give des $ argent sale',						value = 'menuperso_modo_give_moneydirty'})
+					table.insert(elements, {label = 'Afficher/Cacher Coordonnées',		value = 'menuperso_modo_showcoord'})
+					table.insert(elements, {label = 'Afficher/Cacher nom des joueurs',	value = 'menuperso_modo_showname'})
+					table.insert(elements, {label = 'TP sur le marker',							value = 'menuperso_modo_tp_marcker'})
+					table.insert(elements, {label = 'Soigner la personne',					value = 'menuperso_modo_heal_player'})
+					table.insert(elements, {label = 'Spéc la personne [WIP]',						value = 'menuperso_modo_spec_player'})
+					table.insert(elements, {label = 'Changer Skin',									value = 'menuperso_modo_changer_skin'})
+					table.insert(elements, {label = 'Save Skin',									value = 'menuperso_modo_save_skin'})
+				end
+
+				if data.current.value == 'menuperso_modo' then
+					ESX.UI.Menu.Open(
+						'default', GetCurrentResourceName(), 'menuperso_modo',
+						{
+							title    = 'Modération',
+							align    = 'top-left',
+							elements = elements
+						},
+						function(data2, menu2)
+
+							if data2.current.value == 'menuperso_modo_tp_toplayer' then
+								admin_tp_toplayer()
+							end
+
+							if data2.current.value == 'menuperso_modo_tp_playertome' then
+								admin_tp_playertome()
+							end
+
+							if data2.current.value == 'menuperso_modo_tp_pos' then
+								admin_tp_pos()
+							end
+
+							if data2.current.value == 'menuperso_modo_no_clip' then
+								admin_no_clip()
+							end
+
+							if data2.current.value == 'menuperso_modo_godmode' then
+								admin_godmode()
+							end
+
+							if data2.current.value == 'menuperso_modo_mode_fantome' then
+								admin_mode_fantome()
+							end
+
+							if data2.current.value == 'menuperso_modo_vehicle_repair' then
+								admin_vehicle_repair()
+							end
+
+							if data2.current.value == 'menuperso_modo_vehicle_spawn' then
+								admin_vehicle_spawn()
+							end
+
+							if data2.current.value == 'menuperso_modo_vehicle_flip' then
+								admin_vehicle_flip()
+							end
+
+							if data2.current.value == 'menuperso_modo_give_money' then
+								admin_give_money()
+							end
+
+							if data2.current.value == 'menuperso_modo_give_moneybank' then
+								admin_give_bank()
+							end
+
+							if data2.current.value == 'menuperso_modo_give_moneydirty' then
+								admin_give_dirty()
+							end
+
+							if data2.current.value == 'menuperso_modo_showcoord' then
+								modo_showcoord()
+							end
+
+							if data2.current.value == 'menuperso_modo_showname' then
+								modo_showname()
+							end
+
+							if data2.current.value == 'menuperso_modo_tp_marcker' then
+								admin_tp_marcker()
+							end
+
+							if data2.current.value == 'menuperso_modo_heal_player' then
+								admin_heal_player()
+							end
+
+							if data2.current.value == 'menuperso_modo_spec_player' then
+								admin_spec_player()
+							end
+
+							if data2.current.value == 'menuperso_modo_changer_skin' then
+								changer_skin()
+							end
+
+							if data2.current.value == 'menuperso_modo_mapmaker' then
+								mapmaker()
+							end
+
+							if data2.current.value == 'menuperso_modo_test_dev' then
+								test()
+							end
+
+							
+						end,
+						function(data2, menu2)
+							menu2.close()
+						end
+					)
+				end
 
 				if data.current.value == 'menuperso_moi' then
 	
 					local elements = {}
 					
-					table.insert(elements, {label = 'Téléphone',    							value = 'menuperso_moi_telephone'})
+					if etatPHONE then
+						table.insert(elements, {label = 'Téléphone',    							value = 'menuperso_moi_telephone'})
+					end
 					table.insert(elements, {label = 'Inventaire',             					value = 'menuperso_moi_inventaire'})
 					table.insert(elements, {label = 'Mes factures',							value = 'menuperso_moi_factures'})
 						
@@ -108,6 +385,7 @@ function OpenPersonnelMenu()
 							align    = 'top-left',
 							elements = {
 								{label = 'Annuler Animations',  value = 'menuperso_actions__annuler'},
+								--{label = 'Faire ses besoins [WIP]',     value = 'menuperso_actions_pipi'},
 								{label = 'Animations de Salutations',  value = 'menuperso_actions_Salute'},
 								{label = 'Animations d\'Humeurs',  value = 'menuperso_actions_Humor'},
 								{label = 'Animations de Travail',  value = 'menuperso_actions_Travail'},
@@ -122,6 +400,10 @@ function OpenPersonnelMenu()
 								if ped then
 									ClearPedTasks(ped);
 								end
+							end
+
+							if data2.current.value == 'menuperso_actions_pipi' then
+								ESX.UI.Menu.CloseAll()
 							end
 
 							if data2.current.value == 'menuperso_actions_Salute' then
@@ -596,7 +878,6 @@ function OpenPersonnelMenu()
 
 				end
 
-
 				if data.current.value == 'menuperso_gpsrapide' then
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_gpsrapide',
@@ -616,28 +897,28 @@ function OpenPersonnelMenu()
 								x, y, z = -259.08557128906, -974.677734375, 31.220008850098
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
-								Notify("Destination ajouté au GPS !")
+								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
 
 							if data2.current.value == 'menuperso_gpsrapide_comico' then
 								x, y, z = -44.385055541992, -1109.7479248047, 26.437595367432
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
-								Notify("Destination ajouté au GPS !")
+								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
 
 							if data2.current.value == 'menuperso_gpsrapide_hopital' then
 								x, y, z = 430.91763305664, -980.24694824218, 31.710563659668
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
-								Notify("Destination ajouté au GPS !")
+								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
 
 							if data2.current.value == 'menuperso_gpsrapide_concessionnaire' then
 								x, y, z = 336.87603759766, -1396.2689208984, 23.509273529053
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
-								Notify("Destination ajouté au GPS !")
+								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
 
 							
@@ -648,18 +929,7 @@ function OpenPersonnelMenu()
 					)
 
 				end
-
-
-
-
-
-
-
-
-
-
-
-
+				
 				if data.current.value == 'menuperso_grade' then
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_grade',
@@ -683,7 +953,7 @@ function OpenPersonnelMenu()
 									if closestPlayer == -1 or closestDistance > 3.0 then
 										ESX.ShowNotification("Aucun joueur à proximité")
 									else
-										TriggerServerEvent('esx:recruterplayer', GetPlayerServerId(closestPlayer), job,grade)
+										TriggerServerEvent('NB:recruterplayer', GetPlayerServerId(closestPlayer), job,grade)
 									end
 
 								else
@@ -701,7 +971,7 @@ function OpenPersonnelMenu()
 									if closestPlayer == -1 or closestDistance > 3.0 then
 										ESX.ShowNotification("Aucun joueur à proximité")
 									else
-										TriggerServerEvent('esx:virerplayer', GetPlayerServerId(closestPlayer))
+										TriggerServerEvent('NB:virerplayer', GetPlayerServerId(closestPlayer))
 									end
 
 								else
@@ -718,7 +988,7 @@ function OpenPersonnelMenu()
 									if closestPlayer == -1 or closestDistance > 3.0 then
 										ESX.ShowNotification("Aucun joueur à proximité")
 									else
-										TriggerServerEvent('esx:promouvoirplayer', GetPlayerServerId(closestPlayer))
+										TriggerServerEvent('NB:promouvoirplayer', GetPlayerServerId(closestPlayer))
 									end
 
 								else
@@ -736,7 +1006,7 @@ function OpenPersonnelMenu()
 									if closestPlayer == -1 or closestDistance > 3.0 then
 										ESX.ShowNotification("Aucun joueur à proximité")
 									else
-										TriggerServerEvent('esx:destituerplayer', GetPlayerServerId(closestPlayer))
+										TriggerServerEvent('NB:destituerplayer', GetPlayerServerId(closestPlayer))
 									end
 
 								else
@@ -753,7 +1023,7 @@ function OpenPersonnelMenu()
 							menu2.close()
 						end
 					)
-				end			
+				end	
 				
 				
 			end,
@@ -761,26 +1031,592 @@ function OpenPersonnelMenu()
 				menu.close()
 			end
 		)
+		
+	end)
 end
+	
+
+---------------------------------------------------------------------------Modération
+
+-- GOTO JOUEUR
+function admin_tp_toplayer()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez l'id du joueur...")
+	inputgoto = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputgoto == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputgoto = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputgoto = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputgoto = 0
+			end
+		end
+		if inputgoto == 2 then
+        --local x,y,z = getPosition()
+		local gotoply = GetOnscreenKeyboardResult()
+        --local tplayer = GetPlayerPed(GetPlayerFromServerId(id))
+        --x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(gotoply) , true))
+        -- x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(GetPlayerFromServerId(gotoply) , true)))
+        -- SetEntityCoords(GetPlayerPed(-1), x+0.0001, y+0.0001, z+0.0001, 1, 0, 0, 1)
+	    local playerPed = GetPlayerPed(-1)
+	    local teleportPed = GetEntityCoords(GetPlayerPed(GetPlayerFromServerId(tonumber(gotoply))))
+	    SetEntityCoords(playerPed, teleportPed)
+		
+        inputgoto = 0
+		end
+	end
+end)
+-- FIN GOTO JOUEUR
+
+-- TP UN JOUEUR A MOI
+function admin_tp_playertome()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez l'id du joueur...")
+	inputteleport = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputteleport == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputteleport = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+				inputteleport = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputteleport = 0
+			end
+		end
+		if inputteleport == 2 then
+		local teleportply = GetOnscreenKeyboardResult()
+	    local playerPed = GetPlayerFromServerId(tonumber(teleportply))
+	    local teleportPed = GetEntityCoords(GetPlayerPed(-1))
+	    SetEntityCoords(playerPed, teleportPed)
+		inputteleport = 0
+		end
+	end
+end)
+-- FIN TP UN JOUEUR A MOI
+
+-- TP A POSITION
+function admin_tp_pos()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez la position...")
+	inputpos = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputpos == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputpos = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputpos = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputpos = 0
+			end
+		end
+		if inputpos == 2 then
+			local pos = GetOnscreenKeyboardResult() -- GetOnscreenKeyboardResult RECUPERE LA POSITION RENTRER PAR LE JOUEUR
+			local _,_,x,y,z = string.find( pos or "0,0,0", "([%d%.]+),([%d%.]+),([%d%.]+)" )
+			
+			--SetEntityCoords(GetPlayerPed(-1), x, y, z)
+		    SetEntityCoords(GetPlayerPed(-1), x+0.0001, y+0.0001, z+0.0001) -- TP LE JOUEUR A LA POSITION
+			inputpos = 0
+		end
+	end
+end)
+-- FIN TP A POSITION
+
+-- FONCTION NOCLIP 
+local noclip = false
+local noclip_speed = 1.0
+
+function admin_no_clip()
+  noclip = not noclip
+  local ped = GetPlayerPed(-1)
+  if noclip then -- activé
+    SetEntityInvincible(ped, true)
+    SetEntityVisible(ped, false, false)
+	Notify("Noclip ~g~activé")
+  else -- désactivé
+    SetEntityInvincible(ped, false)
+    SetEntityVisible(ped, true, false)
+	Notify("Noclip ~r~désactivé")
+  end
+end
+
+function getPosition()
+  local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
+  return x,y,z
+end
+
+function getCamDirection()
+  local heading = GetGameplayCamRelativeHeading()+GetEntityHeading(GetPlayerPed(-1))
+  local pitch = GetGameplayCamRelativePitch()
+
+  local x = -math.sin(heading*math.pi/180.0)
+  local y = math.cos(heading*math.pi/180.0)
+  local z = math.sin(pitch*math.pi/180.0)
+
+  local len = math.sqrt(x*x+y*y+z*z)
+  if len ~= 0 then
+    x = x/len
+    y = y/len
+    z = z/len
+  end
+
+  return x,y,z
+end
+
+function isNoclip()
+  return noclip
+end
+
+-- noclip/invisible
+Citizen.CreateThread(function()
+  while true do
+    Citizen.Wait(0)
+    if noclip then
+      local ped = GetPlayerPed(-1)
+      local x,y,z = getPosition()
+      local dx,dy,dz = getCamDirection()
+      local speed = noclip_speed
+
+      -- reset du velocity
+      SetEntityVelocity(ped, 0.0001, 0.0001, 0.0001)
+
+      -- aller vers le haut
+      if IsControlPressed(0,32) then -- MOVE UP
+        x = x+speed*dx
+        y = y+speed*dy
+        z = z+speed*dz
+      end
+
+      -- aller vers le bas
+      if IsControlPressed(0,269) then -- MOVE DOWN
+        x = x-speed*dx
+        y = y-speed*dy
+        z = z-speed*dz
+      end
+
+      SetEntityCoordsNoOffset(ped,x,y,z,true,true,true)
+    end
+  end
+end)
+-- FIN NOCLIP
+
+-- GOD MODE
+function admin_godmode()
+  godmode = not godmode
+  local ped = GetPlayerPed(-1)
+  
+  if godmode then -- activé
+		SetEntityInvincible(ped, true)
+		Notify("GodMode ~g~activé")
+	else
+		SetEntityInvincible(ped, false)
+		Notify("GodMode ~r~désactivé")
+  end
+end
+-- FIN GOD MODE
+
+-- INVISIBLE
+function admin_mode_fantome()
+  invisible = not invisible
+  local ped = GetPlayerPed(-1)
+  
+  if invisible then -- activé
+		SetEntityVisible(ped, false, false)
+		Notify("Mode fantôme : activé")
+	else
+		SetEntityVisible(ped, true, false)
+		Notify("Mode fantôme : désactivé")
+  end
+end
+-- FIN INVISIBLE
+
+-- Réparer vehicule
+function admin_vehicle_repair()
+
+    local ped = GetPlayerPed(-1)
+    local car = GetVehiclePedIsUsing(ped)
+	
+		SetVehicleFixed(car)
+		SetVehicleDirtLevel(car, 0.0)
+
+end
+-- FIN Réparer vehicule
+
+-- Spawn vehicule
+function admin_vehicle_spawn()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez le nom du véhicule...")
+	inputvehicle = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputvehicle == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputvehicle = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputvehicle = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputvehicle = 0
+			end
+		end
+		if inputvehicle == 2 then
+		local vehicleidd = GetOnscreenKeyboardResult()
+
+				local car = GetHashKey(vehicleidd)
+				
+				Citizen.CreateThread(function()
+					Citizen.Wait(10)
+					RequestModel(car)
+					while not HasModelLoaded(car) do
+						Citizen.Wait(0)
+					end
+                    local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
+					veh = CreateVehicle(car, x,y,z, 0.0, true, false)
+					SetEntityVelocity(veh, 2000)
+					SetVehicleOnGroundProperly(veh)
+					SetVehicleHasBeenOwnedByPlayer(veh,true)
+					local id = NetworkGetNetworkIdFromEntity(veh)
+					SetNetworkIdCanMigrate(id, true)
+					SetVehRadioStation(veh, "OFF")
+					SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
+					Notify("Véhicule spawn, bonne route")
+				end)
+		
+        inputvehicle = 0
+		end
+	end
+end)
+-- FIN Spawn vehicule
+
+-- Spawn vehicule
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputvehicle == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputvehicle = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputvehicle = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputvehicle = 0
+			end
+		end
+		if inputvehicle == 2 then
+		local vehicleidd = GetOnscreenKeyboardResult()
+
+				local car = GetHashKey(vehicleidd)
+				
+				Citizen.CreateThread(function()
+					Citizen.Wait(10)
+					RequestModel(car)
+					while not HasModelLoaded(car) do
+						Citizen.Wait(0)
+					end
+                    local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
+					veh = CreateVehicle(car, x,y,z, 0.0, true, false)
+					SetEntityVelocity(veh, 2000)
+					SetVehicleOnGroundProperly(veh)
+					SetVehicleHasBeenOwnedByPlayer(veh,true)
+					local id = NetworkGetNetworkIdFromEntity(veh)
+					SetNetworkIdCanMigrate(id, true)
+					SetVehRadioStation(veh, "OFF")
+					SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
+					Notify("Véhicule spawn, bonne route")
+				end)
+		
+        inputvehicle = 0
+		end
+	end
+end)
+-- FIN Spawn vehicule
+
+-- flipVehicle
+function admin_vehicle_flip()
+
+    local player = GetPlayerPed(-1)
+    posdepmenu = GetEntityCoords(player)
+    carTargetDep = GetClosestVehicle(posdepmenu['x'], posdepmenu['y'], posdepmenu['z'], 10.0,0,70)
+	if carTargetDep ~= nil then
+			platecarTargetDep = GetVehicleNumberPlateText(carTargetDep)
+	end
+    local playerCoords = GetEntityCoords(GetPlayerPed(-1))
+    playerCoords = playerCoords + vector3(0, 2, 0)
+	
+	SetEntityCoords(carTargetDep, playerCoords)
+	
+	Notify("Voiture retourné")
+
+end
+-- FIN flipVehicle
+
+-- GIVE DE L'ARGENT
+function admin_give_money()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez le montant a vous GIVE...")
+	inputmoney = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputmoney == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputmoney = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputmoney = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputmoney = 0
+			end
+		end
+		if inputmoney == 2 then
+			local repMoney = GetOnscreenKeyboardResult()
+			local money = tonumber(repMoney)
+			
+			TriggerServerEvent('AdminMenu:giveCash', money)
+			inputmoney = 0
+		end
+	end
+end)
+-- FIN GIVE DE L'ARGENT
+
+-- GIVE DE L'ARGENT EN BANQUE
+function admin_give_bank()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez le montant a vous GIVE...")
+	inputmoneybank = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputmoneybank == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputmoneybank = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputmoneybank = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputmoneybank = 0
+			end
+		end
+		if inputmoneybank == 2 then
+			local repMoney = GetOnscreenKeyboardResult()
+			local money = tonumber(repMoney)
+			
+			TriggerServerEvent('AdminMenu:giveBank', money)
+			inputmoneybank = 0
+		end
+	end
+end)
+-- FIN GIVE DE L'ARGENT EN BANQUE
+
+-- GIVE DE L'ARGENT SALE
+function admin_give_dirty()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez le montant a vous GIVE...")
+	inputmoneydirty = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputmoneydirty == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputmoneydirty = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputmoneydirty = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputmoneydirty = 0
+			end
+		end
+		if inputmoneydirty == 2 then
+			local repMoney = GetOnscreenKeyboardResult()
+			local money = tonumber(repMoney)
+			
+			TriggerServerEvent('AdminMenu:giveDirtyMoney', money)
+			inputmoneydirty = 0
+		end
+	end
+end)
+-- FIN GIVE DE L'ARGENT SALE
+
+-- Afficher Coord
+function modo_showcoord()
+	if showcoord then
+		showcoord = false
+	else
+		showcoord = true
+	end
+end
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+		
+		if showcoord then
+			local playerPos = GetEntityCoords(GetPlayerPed(-1))
+			local playerHeading = GetEntityHeading(GetPlayerPed(-1))
+			Text("~r~X~s~: " ..playerPos.x.." ~b~Y~s~: " ..playerPos.y.." ~g~Z~s~: " ..playerPos.z.." ~y~Angle~s~: " ..playerHeading.."")
+		end
+		
+	end
+end)
+-- FIN Afficher Coord
+
+-- Afficher Nom
+function modo_showname()
+	if showname then
+		showname = false
+	else
+		Notify("Ouvrir et fermer le menu pause pour afficher les nom")
+		showname = true
+	end
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait( 1 )
+		if showname then
+			for id = 0, 200 do
+				if NetworkIsPlayerActive( id ) and GetPlayerPed( id ) ~= GetPlayerPed( -1 ) then
+					ped = GetPlayerPed( id )
+					blip = GetBlipFromEntity( ped )
+					headId = Citizen.InvokeNative( 0xBFEFE3321A3F5015, ped, (GetPlayerServerId( id )..' - '..GetPlayerName( id )), false, false, "", false )
+				end
+			end
+		else
+			for id = 0, 200 do
+				if NetworkIsPlayerActive( id ) and GetPlayerPed( id ) ~= GetPlayerPed( -1 ) then
+					ped = GetPlayerPed( id )
+					blip = GetBlipFromEntity( ped )
+					headId = Citizen.InvokeNative( 0xBFEFE3321A3F5015, ped, (' '), false, false, "", false )
+				end
+			end
+		end
+	end
+end)
+-- FIN Afficher Nom
+
+-- TP MARCKER
+function admin_tp_marcker()
+	
+	ESX.TriggerServerCallback('NB:getUsergroup', function(group)
+		playergroup = group
+		
+		if playergroup == 'admin' or playergroup == 'owner' then
+			local playerPed = GetPlayerPed(-1)
+			local WaypointHandle = GetFirstBlipInfoId(8)
+			if DoesBlipExist(WaypointHandle) then
+				local coord = Citizen.InvokeNative(0xFA7C7F0AADF25D09, WaypointHandle, Citizen.ResultAsVector())
+				--SetEntityCoordsNoOffset(playerPed, coord.x, coord.y, coord.z, false, false, false, true)
+				SetEntityCoordsNoOffset(playerPed, coord.x, coord.y, -199.5, false, false, false, true)
+				Notify("Téléporté sur le marcker !")
+			else
+				Notify("Pas de marcker sur la map !")
+			end
+		end
+		
+	end)
+end
+-- FIN TP MARCKER
+
+-- HEAL JOUEUR
+function admin_heal_player()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez l'id du joueur...")
+	inputheal = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputheal == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputheal = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+				inputheal = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputheal = 0
+			end
+		end
+		if inputheal == 2 then
+		local healply = GetOnscreenKeyboardResult()
+		TriggerServerEvent('esx_ambulancejob:revive', healply)
+		
+        inputheal = 0
+		end
+	end
+end)
+-- FIN HEAL JOUEUR
+
+-- SPEC JOUEUR
+function admin_spec_player()
+	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
+	Notify("~b~Entrez l'id du joueur...")
+	inputspec = 1
+end
+
+Citizen.CreateThread(function()
+	while true do
+		Wait(0)
+		if inputspec == 1 then
+			if UpdateOnscreenKeyboard() == 3 then
+				inputspec = 0
+			elseif UpdateOnscreenKeyboard() == 1 then
+					inputspec = 2
+			elseif UpdateOnscreenKeyboard() == 2 then
+				inputspec = 0
+			end
+		end
+		if inputspec == 2 then
+		local target = GetOnscreenKeyboardResult()
+		
+		TriggerEvent('es_camera:spectate', source, target)
+		
+        inputspec = 0
+		end
+	end
+end)
+-- FIN SPEC JOUEUR
 
 ---------------------------------------------------------------------------Me concernant
 
 function openTelephone()
-	TriggerEvent('nb:closeAllSubMenu')
-	TriggerEvent('nb:closeAllMenu')
-	TriggerEvent('nb:openMenuTelephone')
+	TriggerEvent('NB:closeAllSubMenu')
+	TriggerEvent('NB:closeAllMenu')
+	TriggerEvent('NB:closeMenuKey')
+	
+	TriggerEvent('NB:openMenuTelephone')
 end
 
 function openInventaire()
-	TriggerEvent('nb:closeAllSubMenu')
-	TriggerEvent('nb:closeAllMenu')
-	TriggerEvent('nb:openMenuInventaire')
+	TriggerEvent('NB:closeAllSubMenu')
+	TriggerEvent('NB:closeAllMenu')
+	TriggerEvent('NB:closeMenuKey')
+	
+	TriggerEvent('NB:openMenuInventaire')
 end
 
 function openFacture()
-	TriggerEvent('nb:closeAllSubMenu')
-	TriggerEvent('nb:closeAllMenu')
-	TriggerEvent('nb:openMenuFactures')
+	TriggerEvent('NB:closeAllSubMenu')
+	TriggerEvent('NB:closeAllMenu')
+	TriggerEvent('NB:closeMenuKey')
+	
+	TriggerEvent('NB:openMenuFactures')
 end
 
 ---------------------------------------------------------------------------Actions
@@ -791,7 +1627,7 @@ local dataAnim = {}
 function animsAction(animObj)
 	if (IsInVehicle()) then
 		local source = GetPlayerServerId();
-		Notify("Sortez de votre véhicule pour faire cela !")
+		ESX.ShowNotification("Sortez de votre véhicule pour faire cela !")
 	else
 		Citizen.CreateThread(function()
 			if not playAnim then
@@ -830,11 +1666,12 @@ function animsAction(animObj)
 		end)
 	end
 end
+	
 
 function animsActionScenario(animObj)
 	if (IsInVehicle()) then
 		local source = GetPlayerServerId();
-		Notify("Sortez de votre véhicule pour faire cela !")
+		ESX.ShowNotification("Sortez de votre véhicule pour faire cela !")
 	else
 		Citizen.CreateThread(function()
 			if not playAnim then
@@ -859,19 +1696,19 @@ function vehicule_Moteur(Action)
 			if Action then
 				SetVehicleUndriveable(vehicle, false)
 				local source = GetPlayerServerId();
-				Notify("Moteur démarré !")
+				ESX.ShowNotification("Moteur démarré !")
 			else
 				SetVehicleUndriveable(vehicle, true)
 				local source = GetPlayerServerId();
-				Notify("Moteur coupé !")
+				ESX.ShowNotification("Moteur coupé !")
 			end
 		else
 			local source = GetPlayerServerId();
-			Notify("Vous devez etre a la place du conducteur !")
+				ESX.ShowNotification("Vous devez etre a la place du conducteur !")
 		end
 	else
 		local source = GetPlayerServerId();
-		Notify("Vous devez etre dans un véhicule pour faire cela !")
+				ESX.ShowNotification("Vous devez etre dans un véhicule !")
 	end
 end
 
@@ -897,47 +1734,47 @@ function vehicule_ouvrirporte(porte)
 			if porte == 0 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte avant gauche : Ouverte")
+				ESX.ShowNotification("Porte avant gauche : Ouverte")
 			elseif porte == 1 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte avant droite : Ouverte")
+				ESX.ShowNotification("Porte avant droite : Ouverte")
 			elseif porte == 2 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte arrière gauche : Ouverte")
+				ESX.ShowNotification("Porte arrière gauche : Ouverte")
 			elseif porte == 3 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte arrière droite : Ouverte")
+				ESX.ShowNotification("Porte arrière droite : Ouverte")
 			elseif porte == 4 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Capot : Ouvert")
+				ESX.ShowNotification("Capot : Ouvert")
 			elseif porte == 5 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Capot : Ouvert")
+				ESX.ShowNotification("Capot : Ouvert")
 			elseif porte == 6 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Autre 1 : Ouvert")
+				ESX.ShowNotification("Autre 1 : Ouvert")
 			elseif porte == 7 then
 				OuvrirLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Autre 2 : Ouvert")
+				ESX.ShowNotification("Autre 2 : Ouvert")
 			elseif porte == 99 then
 				OuvrirTOUTPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Tout : Ouvert")
+				ESX.ShowNotification("Tout : Ouvert")
 			end
 		else
 			local source = GetPlayerServerId();
-			Notify("Vous devez etre a la place du conducteur !")
+			ESX.ShowNotification("Vous devez etre a la place du conducteur !")
 		end
 	else
 		local source = GetPlayerServerId();
-		Notify("Vous devez etre dans un véhicule pour faire cela !")
+		ESX.ShowNotification("Vous devez etre dans un véhicule pour faire cela !")
 	end
 end
 
@@ -963,47 +1800,47 @@ function vehicule_fermerporte(porte)
 			if porte == 0 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte avant gauche : Fermé")
+				ESX.ShowNotification("Porte avant gauche : Fermé")
 			elseif porte == 1 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte avant droite : Fermé")
+				ESX.ShowNotification("Porte avant droite : Fermé")
 			elseif porte == 2 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte arrière gauche : Fermé")
+				ESX.ShowNotification("Porte arrière gauche : Fermé")
 			elseif porte == 3 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Porte arrière droite : Fermé")
+				ESX.ShowNotification("Porte arrière droite : Fermé")
 			elseif porte == 4 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Capot : Fermé")
+				ESX.ShowNotification("Capot : Fermé")
 			elseif porte == 5 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Capot : Fermé")
+				ESX.ShowNotification("Capot : Fermé")
 			elseif porte == 6 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Autre 1 : Fermé")
+				ESX.ShowNotification("Autre 1 : Fermé")
 			elseif porte == 7 then
 				FermerLaPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Autre 2 : Fermé")
+				ESX.ShowNotification("Autre 2 : Fermé")
 			elseif porte == 99 then
 				FermerTOUTPorte(porte, vehicle)
 				local source = GetPlayerServerId();
-				Notify("Tout : Fermé")
+				ESX.ShowNotification("Tout : Fermé")
 			end
 		else
 			local source = GetPlayerServerId();
-			Notify("Vous devez etre a la place du conducteur !")
+			ESX.ShowNotification("Vous devez etre a la place du conducteur !")
 		end
 	else
 		local source = GetPlayerServerId();
-		Notify("Vous devez etre dans un véhicule pour faire cela !")
+		ESX.ShowNotification("Vous devez etre dans un véhicule pour faire cela !")
 	end
 end
 
@@ -1017,17 +1854,46 @@ function IsInVehicle()
 	end
 end
 
+function changer_skin()
+	TriggerEvent('esx_skin:openSaveableMenu', source)
+end
+
+function save_skin()
+	TriggerEvent('esx_skin:requestSaveSkin', source)
+end
+
+function mapmaker()
+	TriggerEvent('NB:closeAllSubMenu')
+	TriggerEvent('NB:closeAllMenu')
+	TriggerServerEvent("MapMaker:CheckIfCanOpenMenu")
+end
+
+function test()
+	TriggerServerEvent('NB:test')
+end
+
+RegisterNetEvent('NB:testretour')
+AddEventHandler('NB:testretour', function(currentDatetime)
+	Notify("TEST : "..currentDatetime)
+end)
+
 ---------------------------------------------------------------------------------------------------------
---NB : Fermeture des sous menu
+--No Brain : gestion des touches nb_menuperso
 ---------------------------------------------------------------------------------------------------------
 
-RegisterNetEvent('nb:openMenuPersonnel')
-AddEventHandler('nb:openMenuPersonnel', function()
+RegisterNetEvent('NB:goTpMarcker')
+AddEventHandler('NB:goTpMarcker', function()
+	admin_tp_marcker()
+end)
+
+RegisterNetEvent('NB:openMenuPersonnel')
+AddEventHandler('NB:openMenuPersonnel', function()
+	TriggerEvent('NB:openMenuKey')
 	OpenPersonnelMenu()
 end)
 
-RegisterNetEvent('nb:closeMenuPersonnel')
-AddEventHandler('nb:closeMenuPersonnel', function()
+RegisterNetEvent('NB:closeMenuPersonnel')
+AddEventHandler('NB:closeMenuPersonnel', function()
 
 	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_moi') then
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_moi')
@@ -1056,241 +1922,12 @@ AddEventHandler('nb:closeMenuPersonnel', function()
 		
 	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_gpsrapide') then
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_gpsrapide')
+		
 	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_grade') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_grade')	
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_grade')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_modo') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_modo')
 		
 	end
-end)
-
---------------------------------------------------------------------------------------------
--- NB : gestion des touches menu
---------------------------------------------------------------------------------------------
-
-Citizen.CreateThread(function()
-	while true do
-		Wait(0)
---------------------------------------------------------------------------------------------
--- Menu personnel -> nb_menuperso
---------------------------------------------------------------------------------------------
-		
-		if (IsControlPressed(0,  Keys["F5"]) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuPersonnel')
-			GUI.Time  = GetGameTimer()
-		end
-		
-		if (IsControlPressed(0,  Keys["F5"]) and ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time  = GetGameTimer()
-		end
-		
---------------------------------------- MANETTE
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and not ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuPersonnel')
-			GUI.Time  = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time  = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu inventaire -> es_extended
---------------------------------------------------------------------------------------------
-
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["G"]) and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuInventaire')
-			GUI.Time = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["G"]) and ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time  = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu telephone -> esx_phone
---------------------------------------------------------------------------------------------
-		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["U"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuTelephone')
-			GUI.Time = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["U"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu factures -> esx_billing
---------------------------------------------------------------------------------------------
-		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["Y"]) and not ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuFactures')
-			GUI.Time = GetGameTimer()
-		end
-
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["Y"]) and ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu police -> esx_policejob
---------------------------------------------------------------------------------------------
-
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuPolice')
-			GUI.Time = GetGameTimer()
-		end
-
-  	if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time = GetGameTimer()
-		end
-		
---------------------------------------- MANETTE
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuPolice')
-			GUI.Time  = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time  = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu ambulance -> esx_ambulancejob
---------------------------------------------------------------------------------------------
-
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuAmbulance')
-			GUI.Time = GetGameTimer()
-		end
-
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time = GetGameTimer()
-		end
-		
---------------------------------------- MANETTE
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuAmbulance')
-			GUI.Time  = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time  = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------------
-
-
---------------------------------------------------------------------------------------------
--- Menu Mecano -> esx_mecanojob
---------------------------------------------------------------------------------------------
-
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuMecano')
-			GUI.Time = GetGameTimer()
-		end
-
-  	if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time = GetGameTimer()
-		end
-		
---------------------------------------- MANETTE
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			TriggerEvent('nb:openMenuMecano')
-			GUI.Time  = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('nb:closeAllSubMenu')
-			TriggerEvent('nb:closeAllMenu')
-			GUI.Time  = GetGameTimer()
-		end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	end
-end)
-
-
-
-RegisterNetEvent('nb:closeAllSubMenu')
-AddEventHandler('nb:closeAllSubMenu', function()
-	TriggerEvent('nb:closeMenuAmbulance')
-	TriggerEvent('nb:closeMenuPolice')
-	TriggerEvent('nb:closeMenuMecano')
-	TriggerEvent('nb:closeMenuInventaire')
-	TriggerEvent('nb:closeMenuPersonnel')
-end)
-
-RegisterNetEvent('nb:closeAllMenu')
-AddEventHandler('nb:closeAllMenu', function()
-	ESX.UI.Menu.CloseAll()
 end)
