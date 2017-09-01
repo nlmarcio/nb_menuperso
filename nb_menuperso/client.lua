@@ -1831,7 +1831,6 @@ end)
 
 RegisterNetEvent('NB:openMenuPersonnel')
 AddEventHandler('NB:openMenuPersonnel', function()
-	TriggerEvent('NB:openMenuKey')
 	OpenPersonnelMenu()
 end)
 
