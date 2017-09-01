@@ -22,9 +22,9 @@ Copier le dossier "nb_menuperso" dans resources<br>
 Ajouter "start nb_menuperso" dans votre serveur.cfg<br>
 
 ## Lignes a modifier dans d'autres scripts
-__####################__
-__Dans es_extended :__
-__####################__
+__####################__<br>
+__Dans es_extended :__<br>
+__####################__<br>
 Modifier le es_extended/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 -- Menu interactions
@@ -86,9 +86,9 @@ AddEventHandler('NB:closeMenuInventaire', function()
 	end
 end)
 ```
-__####################__
-__Dans esx_phone :__
-__####################__
+__####################__<br>
+__Dans esx_phone :__<br>
+__####################__<br>
 Modifier le esx_phone/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
     else
@@ -120,9 +120,9 @@ AddEventHandler('NB:closeMenuTelephone', function()
 	TriggerEvent('NB:closeAllMenu')
 end)
 ```
-__####################__
-__Dans esx_billing :__
-__####################__
+__####################__<br>
+__Dans esx_billing :__<br>
+__####################__<br>
 Modifier le esx_billing/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 --Key controls
@@ -155,9 +155,9 @@ AddEventHandler('NB:closeMenuFactures', function()
 	TriggerEvent('NB:closeAllMenu')
 end)
 ```
-__####################__
-__Dans esx_policejob :__
-__####################__
+__####################__<br>
+__Dans esx_policejob :__<br>
+__####################__<br>
 Modifier le esx_policejob/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 		if IsControlPressed(0,  Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'police_actions') and (GetGameTimer() - GUI.Time) > 150 then
@@ -189,9 +189,9 @@ AddEventHandler('NB:closeMenuPolice', function()
 	end
 end)
 ```
-__####################__
-__Dans esx_ambulancejob :__
-__####################__
+__####################__<br>
+__Dans esx_ambulancejob :__<br>
+__####################__<br>
 Modifier le esx_ambulancejob/client/main.lua pour commenter les lignes suivante :<br>
 ```lua
 		if IsControlPressed(0,  Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and (GetGameTimer() - GUI.Time) > 150 then
@@ -217,9 +217,9 @@ AddEventHandler('NB:closeMenuAmbulance', function()
 	end
 end)
 ```
-__####################__
-__Dans esx_mecanojob :__
-__####################__
+__####################__<br>
+__Dans esx_mecanojob :__<br>
+__####################__<br>
 Modifier le esx_mecanojob/client/main.lua commenter les lignes suivantes : 
 ```lua
 	if IsControlJustReleased(0, Keys['F6']) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' then
