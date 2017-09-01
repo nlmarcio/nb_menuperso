@@ -62,66 +62,20 @@ function OpenPersonnelMenu()
 		
 		local elements = {}
 		
-		if playergroup == 'user' then
-			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
-			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
-			if (IsInVehicle()) then
-				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
-				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
-					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
-				end
-			end
-			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			if PlayerData.job.grade_name == 'boss' then
-				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
+		table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
+		table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
+		if (IsInVehicle()) then
+			local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
+			if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
+				table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
 			end
 		end
-		
-		if playergroup == 'mod' then
-			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
-			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
-			if (IsInVehicle()) then
-				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
-				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
-					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
-				end
-			end
-			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			if PlayerData.job.grade_name == 'boss' then
-				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
-			end
-			table.insert(elements, {label = 'Modération',				value = 'menuperso_modo'})
+		table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
+		if PlayerData.job.grade_name == 'boss' then
+			table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
 		end
-		
-		if playergroup == 'admin' then
-			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
-			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
-			if (IsInVehicle()) then
-				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
-				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
-					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
-				end
-			end
-			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			if PlayerData.job.grade_name == 'boss' then
-				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
-			end
-			table.insert(elements, {label = 'Modération',				value = 'menuperso_modo'})
-		end
-		
-		if playergroup == 'owner' then
-			table.insert(elements, {label = 'Me concernant',		value = 'menuperso_moi'})
-			table.insert(elements, {label = 'Actions',					value = 'menuperso_actions'})
-			if (IsInVehicle()) then
-				local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
-				if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
-					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
-				end
-			end
-			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			if PlayerData.job.grade_name == 'boss' then
-				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
-			end
+				
+		if (playergroup == 'mod') or (playergroup == 'admin') or (playergroup == 'owner') then
 			table.insert(elements, {label = 'Modération',				value = 'menuperso_modo'})
 		end
 		
