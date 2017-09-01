@@ -53,9 +53,6 @@ function Text(text)
 		DrawText(0.017, 0.977)
 end
 
-etatGPS = false
-etatPHONE = false
-
 function OpenPersonnelMenu()
 	
 	ESX.UI.Menu.CloseAll()
