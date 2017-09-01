@@ -30,7 +30,7 @@ AddEventHandler("AdminMenu:giveCash", function(money)
 	xPlayer.addMoney((total))
 	local item = ' $ d\'argent !'
 	local message = 'Tu t\'est GIVE '
-	TriggerClientEvent('esx:showNotification', _source, message" "..total.." "..item)
+	TriggerClientEvent('esx:showNotification', _source, message.." "..total.." "..item)
 
 end)
 
@@ -44,7 +44,7 @@ AddEventHandler("AdminMenu:giveBank", function(money)
 	xPlayer.addAccountMoney('bank', total)
 	local item = ' $ d\'argent en Banque !'
 	local message = 'Tu t\'est GIVE '
-	TriggerClientEvent('esx:showNotification', _source, message" "..total.." "..item)
+	TriggerClientEvent('esx:showNotification', _source, message.." "..total.." "..item)
 
 end)
 
@@ -58,7 +58,7 @@ AddEventHandler("AdminMenu:giveDirtyMoney", function(money)
 	xPlayer.addAccountMoney('black_money', total)
 	local item = ' $ d\'argent sale !'
 	local message = 'Tu t\'est GIVE '
-	TriggerClientEvent('esx:showNotification', _source, message" "..total.." "..item)
+	TriggerClientEvent('esx:showNotification', _source, message.." "..total.." "..item)
 
 end)
 
@@ -92,7 +92,7 @@ AddEventHandler('NB:promouvoirplayer', function(target)
 			targetXPlayer.setJob(job, grade)
 
 			TriggerClientEvent('esx:showNotification', _source, "Vous avez ~g~promu "..targetXPlayer.name.."~w~.")
-			TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~promu par".. sourceXPlayer.name.."~w~.")		
+			TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~g~promu par".. sourceXPlayer.name.."~w~.")		
 
 		else
 			TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas ~r~l'autorisation~w~.")
@@ -112,7 +112,7 @@ AddEventHandler('NB:destituerplayer', function(target)
 	local targetXPlayer = ESX.GetPlayerFromId(target)
 
 	if(targetXPlayer.job.grade == 0)then
-		TriggerClientEvent('esx:showNotification', _source, "Vous ne pouvez pas plus ~r~rétrograder~w~.")
+		TriggerClientEvent('esx:showNotification', _source, "Vous ne pouvez pas plus ~r~rÃ©trograder~w~.")
 	else
 		if(sourceXPlayer.job.name == targetXPlayer.job.name)then
 
@@ -121,8 +121,8 @@ AddEventHandler('NB:destituerplayer', function(target)
 
 			targetXPlayer.setJob(job, grade)
 
-			TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~rétrogradé "..targetXPlayer.name.."~w~.")
-			TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~r~rétrogradé par".. sourceXPlayer.name.."~w~.")		
+			TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~rÃ©trogradÃ© "..targetXPlayer.name.."~w~.")
+			TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~r~rÃ©trogradÃ© par".. sourceXPlayer.name.."~w~.")		
 
 		else
 			TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas ~r~l'autorisation~w~.")
@@ -143,8 +143,8 @@ AddEventHandler('NB:recruterplayer', function(target, job, grade)
 	
 		targetXPlayer.setJob(job, grade)
 
-		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~g~recruté "..targetXPlayer.name.."~w~.")
-		TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~embauché par".. sourceXPlayer.name.."~w~.")		
+		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~g~recrutÃ© "..targetXPlayer.name.."~w~.")
+		TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~g~embauchÃ© par".. sourceXPlayer.name.."~w~.")		
 
 end)
 
@@ -161,8 +161,8 @@ AddEventHandler('esx:virerplayer', function(target)
 	if(sourceXPlayer.job.name == targetXPlayer.job.name)then
 		targetXPlayer.setJob(job, grade)
 
-		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~viré "..targetXPlayer.name.."~w~.")
-		TriggerClientEvent('esx:showNotification', target,  "Vous avez été ~g~viré par".. sourceXPlayer.name.."~w~.")	
+		TriggerClientEvent('esx:showNotification', _source, "Vous avez ~r~virÃ© "..targetXPlayer.name.."~w~.")
+		TriggerClientEvent('esx:showNotification', target,  "Vous avez Ã©tÃ© ~g~virÃ© par".. sourceXPlayer.name.."~w~.")	
 	else
 
 		TriggerClientEvent('esx:showNotification', _source, "Vous n'avez pas ~r~l'autorisation~w~.")
