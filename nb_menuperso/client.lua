@@ -58,29 +58,6 @@ etatPHONE = false
 
 function OpenPersonnelMenu()
 	
-	TriggerServerEvent("NB:VerifPlayerGpsMenuPerso")
-	TriggerServerEvent("NB:VerifPlayerPhoneMenuPerso")
-	
-	RegisterNetEvent("NB:RetourPlayerGpsMenuPersoOK")
-	AddEventHandler("NB:RetourPlayerGpsMenuPersoOK", function(source)
-		etatGPS = true
-	end)
-
-	RegisterNetEvent("NB:RetourPlayerGpsMenuPersoNOP")
-	AddEventHandler("NB:RetourPlayerGpsMenuPersoNOP", function(source)
-		etatGPS = false
-	end)
-
-	RegisterNetEvent("NB:RetourPlayerPhoneMenuPersoOK")
-	AddEventHandler("NB:RetourPlayerPhoneMenuPersoOK", function(source)
-		etatPHONE = true
-	end)
-
-	RegisterNetEvent("NB:RetourPlayerPhoneMenuPersoNOP")
-	AddEventHandler("NB:RetourPlayerPhoneMenuPersoNOP", function(source)
-		etatPHONE = false
-	end)
-	
 	ESX.UI.Menu.CloseAll()
 	
 	ESX.TriggerServerCallback('NB:getUsergroup', function(group)
@@ -97,9 +74,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
 				end
 			end
-			if etatGPS then
-				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			end
+			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
 			if PlayerData.job.grade_name == 'boss' then
 				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
 			end
@@ -114,9 +89,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
 				end
 			end
-			if etatGPS then
-				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			end
+			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
 			if PlayerData.job.grade_name == 'boss' then
 				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
 			end
@@ -132,9 +105,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
 				end
 			end
-			if etatGPS then
-				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			end
+			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
 			if PlayerData.job.grade_name == 'boss' then
 				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
 			end
@@ -150,9 +121,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Véhicule',					value = 'menuperso_vehicule'})
 				end
 			end
-			if etatGPS then
-				table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
-			end
+			table.insert(elements, {label = 'GPS Rapide',			value = 'menuperso_gpsrapide'})
 			if PlayerData.job.grade_name == 'boss' then
 				table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
 			end
@@ -319,15 +288,6 @@ function OpenPersonnelMenu()
 							if data2.current.value == 'menuperso_modo_changer_skin' then
 								changer_skin()
 							end
-
-							if data2.current.value == 'menuperso_modo_mapmaker' then
-								mapmaker()
-							end
-
-							if data2.current.value == 'menuperso_modo_test_dev' then
-								test()
-							end
-
 							
 						end,
 						function(data2, menu2)
@@ -340,9 +300,7 @@ function OpenPersonnelMenu()
 	
 					local elements = {}
 					
-					if etatPHONE then
-						table.insert(elements, {label = 'Téléphone',    							value = 'menuperso_moi_telephone'})
-					end
+					table.insert(elements, {label = 'Téléphone',    							value = 'menuperso_moi_telephone'})
 					table.insert(elements, {label = 'Inventaire',             					value = 'menuperso_moi_inventaire'})
 					table.insert(elements, {label = 'Mes factures',							value = 'menuperso_moi_factures'})
 						
@@ -1862,23 +1820,8 @@ function save_skin()
 	TriggerEvent('esx_skin:requestSaveSkin', source)
 end
 
-function mapmaker()
-	TriggerEvent('NB:closeAllSubMenu')
-	TriggerEvent('NB:closeAllMenu')
-	TriggerServerEvent("MapMaker:CheckIfCanOpenMenu")
-end
-
-function test()
-	TriggerServerEvent('NB:test')
-end
-
-RegisterNetEvent('NB:testretour')
-AddEventHandler('NB:testretour', function(currentDatetime)
-	Notify("TEST : "..currentDatetime)
-end)
-
 ---------------------------------------------------------------------------------------------------------
---No Brain : gestion des touches nb_menuperso
+--NB : gestion des menu
 ---------------------------------------------------------------------------------------------------------
 
 RegisterNetEvent('NB:goTpMarcker')
