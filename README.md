@@ -1,13 +1,20 @@
 # nb_menuperso
 Menu personnel pour ESX<br>
 Un menu simple qui regroupe l'inventaire, les factures, le téléphone, les emotes, une gestion lite des véhicules et un menu admin<br>
-Il permet aussi une compatibilité manette accru.<br>
+Il permet aussi une compatibilité manette accru.<br><br>
 Pour ouvrir le menu personnel faite F5 ou X+Fleche du haut a la manette<br>
 Pour ouvrir le menu métier faite F6 ou X+Fleche du bas a la manette<br>
-Pour ouvrir l'inventaire depuis le clavier : Maj+G<br>
-Pour ouvrir le téléphone depuis le clavier : Maj+U<br>
+Pour ouvrir l'inventaire depuis le clavier : Maj+R<br>
+Pour ouvrir le téléphone depuis le clavier : Maj+T<br>
 Pour ouvrir les factures depuis le clavier : Maj+Y<br>
-Pour les admin/owner se TP sur le marker sur la map : Maj+E<br>
+Pour les admin/owner se TP sur le marker sur la map : Maj+E<br><br>
+Ajout des fonctions lever les mains, s'accroupir et pointer du doigt.<br>
+Pour lever les mains depuis le clavier : N<br>
+Pour lever les mains avec la manette : Fleche de droite + X<br>
+Pour s'accroupir depuis le clavier : Ctrl gauche<br>
+Pour s'accroupir avec la manette : Clic joystick gauche<br>
+Pour pointer du doigt depuis le clavier : B<br>
+Pour pointer du doigt avec la manette : Clic joystick droit<br>
 
 ## NECESSAIRE
 https://github.com/indilo53/fivem-es_extended<br>

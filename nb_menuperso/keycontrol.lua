@@ -15,6 +15,7 @@ local GUI							= {}
 GUI.Time							= 0
 local PlayerData				= {}
 local NBMenuIsOpen		= false
+Config								= {}
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
@@ -33,6 +34,28 @@ Citizen.CreateThread(function()
     end
 end)
 
+--------------------------------------------------------------------------------------------
+-- Config
+--------------------------------------------------------------------------------------------
+-- Lever les mains
+Config.handsUP = {
+	clavier = Keys["N"],
+	manette1 = Keys["RIGHT"],
+	manette2 = Keys["F2"],
+}
+-- Pointer du doigt
+Config.pointing = {
+	clavier = Keys["B"],
+	manette = Keys["B"],
+}
+-- S'accroupir
+Config.crouch = {
+	clavier = Keys["LEFTCTRL"],
+	manette = Keys["LEFTCTRL"],
+}
+--------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------
+
 Citizen.CreateThread(function()
 	while true do
 		Wait(0)
@@ -41,14 +64,14 @@ Citizen.CreateThread(function()
 -- Menu personnel -> nb_menuperso
 --------------------------------------------------------------------------------------------
 		
-		if (IsControlPressed(0,  Keys["F5"]) and not ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(0,  Keys["F5"]) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuPersonnel')
 			GUI.Time  = GetGameTimer()
 		end
 		
-		if (IsControlPressed(0,  Keys["F5"]) and ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(0,  Keys["F5"]) and ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -56,14 +79,14 @@ Citizen.CreateThread(function()
 		
 --------------------------------------- MANETTE
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and not ESX.UI.Menu.IsOpen('default',  'nb_menuperso', 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and not ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuPersonnel')
 			GUI.Time  = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and ESX.UI.Menu.IsOpen('default',  'nb_menuperso', 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -93,14 +116,14 @@ Citizen.CreateThread(function()
 -- Menu inventaire -> es_extended
 --------------------------------------------------------------------------------------------
 
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["G"]) and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
+		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["R"]) and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuInventaire')
 			GUI.Time = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["G"]) and ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
+		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["R"]) and ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -110,14 +133,14 @@ Citizen.CreateThread(function()
 -- Menu telephone -> esx_phone
 --------------------------------------------------------------------------------------------
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["U"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["T"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuTelephone')
 			GUI.Time = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["U"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["T"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time = GetGameTimer()
@@ -279,20 +302,20 @@ Citizen.CreateThread(function()
 
 		Wait(0)
 		
-		if (ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menu_perso')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_moi')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_actions')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_actions_Salute')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_actions_Humor')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_actions_Travail')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_actions_Festives')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_actions_Others')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_vehicule')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_vehicule_ouvrirportes')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_vehicule_fermerportes')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_gpsrapide')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_grade')) or
-		(ESX.UI.Menu.IsOpen('default', 'nb_menuperso', 'menuperso_modo')) or
+		if (ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_moi')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Salute')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Humor')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Travail')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Festives')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Others')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule_ouvrirportes')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule_fermerportes')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_gpsrapide')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_grade')) or
+		(ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_modo')) or
 		
 		(ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory')) or
 		(ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory_item')) or

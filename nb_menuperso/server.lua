@@ -62,15 +62,6 @@ AddEventHandler("AdminMenu:giveDirtyMoney", function(money)
 
 end)
 
-RegisterServerEvent('NB:test')
-AddEventHandler('NB:test', function()
-
-	local currentDatetime = os.date("%A %Y-%m-%d %H:%M:%S")
-	
-	TriggerClientEvent( 'NB:testretour', source, currentDatetime)	
-	
-end)
-
 -------------------------------------------------------------------------------Grade Menu
 RegisterServerEvent('NB:promouvoirplayer')
 AddEventHandler('NB:promouvoirplayer', function(target)
