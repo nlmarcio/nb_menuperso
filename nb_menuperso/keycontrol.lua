@@ -9,13 +9,11 @@ local Keys = {
 	["LEFT"] = 174, ["RIGHT"] = 175, ["TOP"] = 27, ["DOWN"] = 173,
 	["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
-
 ESX									= nil
 local GUI							= {}
 GUI.Time							= 0
 local PlayerData				= {}
 local NBMenuIsOpen		= false
-Config								= {}
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded', function(xPlayer)
@@ -35,25 +33,6 @@ Citizen.CreateThread(function()
 end)
 
 --------------------------------------------------------------------------------------------
--- Config
---------------------------------------------------------------------------------------------
--- Lever les mains
-Config.handsUP = {
-	clavier = Keys["N"],
-	manette1 = Keys["RIGHT"],
-	manette2 = Keys["F2"],
-}
--- Pointer du doigt
-Config.pointing = {
-	clavier = Keys["B"],
-	manette = Keys["B"],
-}
--- S'accroupir
-Config.crouch = {
-	clavier = Keys["LEFTCTRL"],
-	manette = Keys["LEFTCTRL"],
-}
---------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------
 
 Citizen.CreateThread(function()
@@ -64,14 +43,14 @@ Citizen.CreateThread(function()
 -- Menu personnel -> nb_menuperso
 --------------------------------------------------------------------------------------------
 		
-		if (IsControlPressed(0,  Keys["F5"]) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.menuperso.clavier) and not ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuPersonnel')
 			GUI.Time  = GetGameTimer()
 		end
 		
-		if (IsControlPressed(0,  Keys["F5"]) and ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.menuperso.clavier) and ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -79,14 +58,14 @@ Citizen.CreateThread(function()
 		
 --------------------------------------- MANETTE
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and not ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menuperso.manette1) and IsControlPressed(0, Config.menuperso.manette2) and not ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuPersonnel')
 			GUI.Time  = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["TOP"]) and ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menuperso.manette1) and IsControlPressed(0, Config.menuperso.manette2) and ESX.UI.Menu.IsOpen('default',  GetCurrentResourceName(), 'menu_perso') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -96,7 +75,7 @@ Citizen.CreateThread(function()
 -- TP MARCKER
 -------------------------
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["E"]) and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.TPMarker.clavier1) and IsControlPressed(1, Config.TPMarker.clavier2) and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:goTpMarcker')
@@ -105,7 +84,7 @@ Citizen.CreateThread(function()
 		
 --------------------------------------- MANETTE
 
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["E"]) and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.TPMarker.manette1) and IsControlPressed(2, Config.TPMarker.manette2) and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:goTpMarcker')
@@ -116,14 +95,14 @@ Citizen.CreateThread(function()
 -- Menu inventaire -> es_extended
 --------------------------------------------------------------------------------------------
 
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["R"]) and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
+		if (IsControlPressed(1, Config.inventaire.clavier1) and IsControlPressed(1, Config.inventaire.clavier2) and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuInventaire')
 			GUI.Time = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["R"]) and ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
+		if (IsControlPressed(1, Config.inventaire.clavier1) and IsControlPressed(1, Config.inventaire.clavier2) and ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -133,14 +112,14 @@ Citizen.CreateThread(function()
 -- Menu telephone -> esx_phone
 --------------------------------------------------------------------------------------------
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["T"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.phone.clavier1) and IsControlPressed(1, Config.phone.clavier2) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuTelephone')
 			GUI.Time = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["T"]) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.phone.clavier1) and IsControlPressed(1, Config.phone.clavier2) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time = GetGameTimer()
@@ -150,14 +129,14 @@ Citizen.CreateThread(function()
 -- Menu factures -> esx_billing
 --------------------------------------------------------------------------------------------
 		
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["Y"]) and not ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.billing.clavier1) and IsControlPressed(1, Config.billing.clavier2) and not ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuFactures')
 			GUI.Time = GetGameTimer()
 		end
 
-		if (IsControlPressed(1, Keys["LEFTSHIFT"]) and IsControlPressed(0, Keys["Y"]) and ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.billing.clavier1) and IsControlPressed(1, Config.billing.clavier2) and ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time = GetGameTimer()
@@ -167,14 +146,14 @@ Citizen.CreateThread(function()
 -- Menu police -> esx_policejob
 --------------------------------------------------------------------------------------------
 
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.menujob.clavier) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuPolice')
 			GUI.Time = GetGameTimer()
 		end
 
-  	if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+  	if (IsControlPressed(1, Config.menujob.clavier) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time = GetGameTimer()
@@ -182,14 +161,14 @@ Citizen.CreateThread(function()
 		
 --------------------------------------- MANETTE
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menujob.manette1) and IsControlPressed(2, Config.menujob.manette2) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and not ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuPolice')
 			GUI.Time  = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menujob.manette1) and IsControlPressed(2, Config.menujob.manette2) and PlayerData.job ~= nil and PlayerData.job.name == 'police' and ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'police_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -199,14 +178,14 @@ Citizen.CreateThread(function()
 -- Menu ambulance -> esx_ambulancejob
 --------------------------------------------------------------------------------------------
 
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.menujob.clavier) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuAmbulance')
 			GUI.Time = GetGameTimer()
 		end
 
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.menujob.clavier) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time = GetGameTimer()
@@ -214,14 +193,14 @@ Citizen.CreateThread(function()
 		
 --------------------------------------- MANETTE
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menujob.manette1) and IsControlPressed(2, Config.menujob.manette2) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and not ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuAmbulance')
 			GUI.Time  = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menujob.manette1) and IsControlPressed(2, Config.menujob.manette2) and PlayerData.job ~= nil and PlayerData.job.name == 'ambulance' and ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'mobile_ambulance_actions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -231,14 +210,14 @@ Citizen.CreateThread(function()
 -- Menu Mecano -> esx_mecanojob
 --------------------------------------------------------------------------------------------
 
-		if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(1, Config.menujob.clavier) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuMecano')
 			GUI.Time = GetGameTimer()
 		end
 
-  	if (IsControlPressed(0, Keys["F6"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+  	if (IsControlPressed(1, Config.menujob.clavier) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time = GetGameTimer()
@@ -246,14 +225,14 @@ Citizen.CreateThread(function()
 		
 --------------------------------------- MANETTE
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menujob.manette1) and IsControlPressed(2, Config.menujob.manette2) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and not ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			TriggerEvent('NB:openMenuMecano')
 			GUI.Time  = GetGameTimer()
 		end
 		
-		if (IsControlPressed(1, Keys["SPACE"]) and IsControlPressed(0, Keys["DOWN"]) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
+		if (IsControlPressed(2, Config.menujob.manette1) and IsControlPressed(2, Config.menujob.manette2) and PlayerData.job ~= nil and PlayerData.job.name == 'mecano' and ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions') and (GetGameTimer() - GUI.Time) > 150) then
 			TriggerEvent('NB:closeAllSubMenu')
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
@@ -335,7 +314,9 @@ Citizen.CreateThread(function()
 		(ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'citizen_interaction')) or
 		
 		(ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'MecanoActions')) or
-		(ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'citizen_interaction')) then
+		(ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'citizen_interaction')) or
+		(ESX.UI.Menu.IsOpen('default', 'esx_shops', 'shop')) 
+		then
 		
 			NBMenuIsOpen = true
 		
