@@ -139,8 +139,8 @@ AddEventHandler('NB:recruterplayer', function(target, job, grade)
 
 end)
 
-RegisterServerEvent('esx:virerplayer')
-AddEventHandler('esx:virerplayer', function(target)
+RegisterServerEvent('NB:virerplayer')
+AddEventHandler('NB:virerplayer', function(target)
 
 	local _source = source
 
