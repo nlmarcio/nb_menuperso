@@ -94,68 +94,66 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'TP sur joueur',    							value = 'menuperso_modo_tp_toplayer'})
 					table.insert(elements, {label = 'TP joueur sur moi',             			value = 'menuperso_modo_tp_playertome'})
 					--table.insert(elements, {label = 'TP sur coordonées [WIP]',						value = 'menuperso_modo_tp_pos'})
-					--table.insert(elements, {label = 'No Clip',										value = 'menuperso_modo_no_clip'})
-					--table.insert(elements, {label = 'GodMode',									value = 'menuperso_modo_godmode'})
+					--table.insert(elements, {label = 'NoClip',										value = 'menuperso_modo_no_clip'})
+					--table.insert(elements, {label = 'Mode invincible',									value = 'menuperso_modo_godmode'})
 					--table.insert(elements, {label = 'Mode fantôme',								value = 'menuperso_modo_mode_fantome'})
 					--table.insert(elements, {label = 'Réparer véhicule',							value = 'menuperso_modo_vehicle_repair'})
-					--table.insert(elements, {label = 'Spawn véhicule',							value = 'menuperso_modo_vehicle_spawn'})
-					--table.insert(elements, {label = 'Flip véhicule',								value = 'menuperso_modo_vehicle_flip'})
-					-- table.insert(elements, {label = 'Se give des $ argent',						value = 'menuperso_modo_give_money'})
-					-- table.insert(elements, {label = 'Se give des $ en banque',						value = 'menuperso_modo_give_moneybank'})
-					-- table.insert(elements, {label = 'Se give des $ argent sale',						value = 'menuperso_modo_give_moneydirty'})
-					table.insert(elements, {label = 'Afficher/Cacher Coordonnées',		value = 'menuperso_modo_showcoord'})
-					table.insert(elements, {label = 'Afficher/Cacher nom des joueurs',	value = 'menuperso_modo_showname'})
-					--table.insert(elements, {label = 'TP sur le marker',							value = 'menuperso_modo_tp_marcker'})
+					--table.insert(elements, {label = 'Faire apparaître un véhicule',							value = 'menuperso_modo_vehicle_spawn'})
+					--table.insert(elements, {label = 'Retourner le véhicule',								value = 'menuperso_modo_vehicle_flip'})
+					--table.insert(elements, {label = 'S\'octroyer de l\'argent',						value = 'menuperso_modo_give_money'})
+					--table.insert(elements, {label = 'S\'octroyer de l\'argent (banque)',						value = 'menuperso_modo_give_moneybank'})
+					--table.insert(elements, {label = 'S\'octroyer de l\'argent sale',						value = 'menuperso_modo_give_moneydirty'})
+					table.insert(elements, {label = 'Afficher/Cacher coordonnées',		value = 'menuperso_modo_showcoord'})
+					table.insert(elements, {label = 'Afficher/Cacher noms des joueurs',	value = 'menuperso_modo_showname'})
+					--table.insert(elements, {label = 'TP sur le marqueur',							value = 'menuperso_modo_tp_marcker'})
 					--table.insert(elements, {label = 'Soigner la personne',					value = 'menuperso_modo_heal_player'})
-					--table.insert(elements, {label = 'Spéc la personne [WIP]',						value = 'menuperso_modo_spec_player'})
-					--table.insert(elements, {label = 'Changer Skin',									value = 'menuperso_modo_changer_skin'})
-					--table.insert(elements, {label = 'Save Skin',									value = 'menuperso_modo_save_skin'})
-					
-					
+					--table.insert(elements, {label = 'Mode spectateur [WIP]',						value = 'menuperso_modo_spec_player'})
+					--table.insert(elements, {label = 'Changer l\'apparence',									value = 'menuperso_modo_changer_skin'})
+					--table.insert(elements, {label = 'Sauvegarder l\'apparence',									value = 'menuperso_modo_save_skin'})
 				end
 			
 				if playergroup == 'admin' then
 					table.insert(elements, {label = 'TP sur joueur',    							value = 'menuperso_modo_tp_toplayer'})
 					table.insert(elements, {label = 'TP joueur sur moi',             			value = 'menuperso_modo_tp_playertome'})
 					--table.insert(elements, {label = 'TP sur coordonées [WIP]',						value = 'menuperso_modo_tp_pos'})
-					table.insert(elements, {label = 'No Clip',										value = 'menuperso_modo_no_clip'})
-					table.insert(elements, {label = 'GodMode',									value = 'menuperso_modo_godmode'})
+					table.insert(elements, {label = 'NoClip',										value = 'menuperso_modo_no_clip'})
+					table.insert(elements, {label = 'Mode invincible',									value = 'menuperso_modo_godmode'})
 					table.insert(elements, {label = 'Mode fantôme',								value = 'menuperso_modo_mode_fantome'})
 					table.insert(elements, {label = 'Réparer véhicule',							value = 'menuperso_modo_vehicle_repair'})
-					table.insert(elements, {label = 'Spawn véhicule',							value = 'menuperso_modo_vehicle_spawn'})
-					table.insert(elements, {label = 'Flip véhicule',								value = 'menuperso_modo_vehicle_flip'})
-					table.insert(elements, {label = 'Se give des $ argent',						value = 'menuperso_modo_give_money'})
-					table.insert(elements, {label = 'Se give des $ en banque',						value = 'menuperso_modo_give_moneybank'})
-					table.insert(elements, {label = 'Se give des $ argent sale',						value = 'menuperso_modo_give_moneydirty'})
-					table.insert(elements, {label = 'Afficher/Cacher Coordonnées',		value = 'menuperso_modo_showcoord'})
-					table.insert(elements, {label = 'Afficher/Cacher nom des joueurs',	value = 'menuperso_modo_showname'})
-					table.insert(elements, {label = 'TP sur le marker',							value = 'menuperso_modo_tp_marcker'})
+					table.insert(elements, {label = 'Faire apparaître un véhicule',							value = 'menuperso_modo_vehicle_spawn'})
+					table.insert(elements, {label = 'Retourner le véhicule',								value = 'menuperso_modo_vehicle_flip'})
+					table.insert(elements, {label = 'S\'octroyer de l\'argent',						value = 'menuperso_modo_give_money'})
+					table.insert(elements, {label = 'S\'octroyer de l\'argent (banque)',						value = 'menuperso_modo_give_moneybank'})
+					table.insert(elements, {label = 'S\'octroyer de l\'argent sale',						value = 'menuperso_modo_give_moneydirty'})
+					table.insert(elements, {label = 'Afficher/Cacher coordonnées',		value = 'menuperso_modo_showcoord'})
+					table.insert(elements, {label = 'Afficher/Cacher noms des joueurs',	value = 'menuperso_modo_showname'})
+					table.insert(elements, {label = 'TP sur le marqueur',							value = 'menuperso_modo_tp_marcker'})
 					table.insert(elements, {label = 'Soigner la personne',					value = 'menuperso_modo_heal_player'})
-					--table.insert(elements, {label = 'Spéc la personne [WIP]',						value = 'menuperso_modo_spec_player'})
-					table.insert(elements, {label = 'Changer Skin',									value = 'menuperso_modo_changer_skin'})
-					table.insert(elements, {label = 'Save Skin',									value = 'menuperso_modo_save_skin'})
+					--table.insert(elements, {label = 'Mode spectateur [WIP]',						value = 'menuperso_modo_spec_player'})
+					table.insert(elements, {label = 'Changer l\'apparence',									value = 'menuperso_modo_changer_skin'})
+					table.insert(elements, {label = 'Sauvegarder l\'apparence',									value = 'menuperso_modo_save_skin'})
 				end
 			
 				if playergroup == 'owner' then
 					table.insert(elements, {label = 'TP sur joueur',    							value = 'menuperso_modo_tp_toplayer'})
 					table.insert(elements, {label = 'TP joueur sur moi',             			value = 'menuperso_modo_tp_playertome'})
 					table.insert(elements, {label = 'TP sur coordonées [WIP]',						value = 'menuperso_modo_tp_pos'})
-					table.insert(elements, {label = 'No Clip',										value = 'menuperso_modo_no_clip'})
-					table.insert(elements, {label = 'GodMode',									value = 'menuperso_modo_godmode'})
+					table.insert(elements, {label = 'NoClip',										value = 'menuperso_modo_no_clip'})
+					table.insert(elements, {label = 'Mode invincible',									value = 'menuperso_modo_godmode'})
 					table.insert(elements, {label = 'Mode fantôme',								value = 'menuperso_modo_mode_fantome'})
 					table.insert(elements, {label = 'Réparer véhicule',							value = 'menuperso_modo_vehicle_repair'})
-					table.insert(elements, {label = 'Spawn véhicule',							value = 'menuperso_modo_vehicle_spawn'})
-					table.insert(elements, {label = 'Flip véhicule',								value = 'menuperso_modo_vehicle_flip'})
-					table.insert(elements, {label = 'Se give des $ argent',						value = 'menuperso_modo_give_money'})
-					table.insert(elements, {label = 'Se give des $ en banque',						value = 'menuperso_modo_give_moneybank'})
-					table.insert(elements, {label = 'Se give des $ argent sale',						value = 'menuperso_modo_give_moneydirty'})
-					table.insert(elements, {label = 'Afficher/Cacher Coordonnées',		value = 'menuperso_modo_showcoord'})
-					table.insert(elements, {label = 'Afficher/Cacher nom des joueurs',	value = 'menuperso_modo_showname'})
-					table.insert(elements, {label = 'TP sur le marker',							value = 'menuperso_modo_tp_marcker'})
+					table.insert(elements, {label = 'Faire apparaître un véhicule',							value = 'menuperso_modo_vehicle_spawn'})
+					table.insert(elements, {label = 'Retourner le véhicule',								value = 'menuperso_modo_vehicle_flip'})
+					table.insert(elements, {label = 'S\'octroyer de l\'argent',						value = 'menuperso_modo_give_money'})
+					table.insert(elements, {label = 'S\'octroyer de l\'argent (banque)',						value = 'menuperso_modo_give_moneybank'})
+					table.insert(elements, {label = 'S\'octroyer de l\'argent sale',						value = 'menuperso_modo_give_moneydirty'})
+					table.insert(elements, {label = 'Afficher/Cacher coordonnées',		value = 'menuperso_modo_showcoord'})
+					table.insert(elements, {label = 'Afficher/Cacher noms des joueurs',	value = 'menuperso_modo_showname'})
+					table.insert(elements, {label = 'TP sur le marqueur',							value = 'menuperso_modo_tp_marcker'})
 					table.insert(elements, {label = 'Soigner la personne',					value = 'menuperso_modo_heal_player'})
-					table.insert(elements, {label = 'Spéc la personne [WIP]',						value = 'menuperso_modo_spec_player'})
-					table.insert(elements, {label = 'Changer Skin',									value = 'menuperso_modo_changer_skin'})
-					table.insert(elements, {label = 'Save Skin',									value = 'menuperso_modo_save_skin'})
+					table.insert(elements, {label = 'Mode spectateur [WIP]',						value = 'menuperso_modo_spec_player'})
+					table.insert(elements, {label = 'Changer l\'apparence',									value = 'menuperso_modo_changer_skin'})
+					table.insert(elements, {label = 'Sauvegarder l\'apparence',									value = 'menuperso_modo_save_skin'})
 				end
 
 				if data.current.value == 'menuperso_modo' then
@@ -293,13 +291,13 @@ function OpenPersonnelMenu()
 							title    = 'Actions',
 							align    = 'top-left',
 							elements = {
-								{label = 'Annuler Animations',  value = 'menuperso_actions__annuler'},
+								{label = 'Annuler l\'animation',  value = 'menuperso_actions__annuler'},
 								--{label = 'Faire ses besoins [WIP]',     value = 'menuperso_actions_pipi'},
-								{label = 'Animations de Salutations',  value = 'menuperso_actions_Salute'},
-								{label = 'Animations d\'Humeurs',  value = 'menuperso_actions_Humor'},
-								{label = 'Animations de Travail',  value = 'menuperso_actions_Travail'},
-								{label = 'Animations Festives',  value = 'menuperso_actions_Festives'},
-								{label = 'Animations Diverses',  value = 'menuperso_actions_Others'},
+								{label = 'Animations de salutations',  value = 'menuperso_actions_Salute'},
+								{label = 'Animations  d\'humeurs',  value = 'menuperso_actions_Humor'},
+								{label = 'Animations de travail',  value = 'menuperso_actions_Travail'},
+								{label = 'Animations festives',  value = 'menuperso_actions_Festives'},
+								{label = 'Animations diverses',  value = 'menuperso_actions_Others'},
 							},
 						},
 						function(data2, menu2)
@@ -319,13 +317,13 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Salute',
 									{
-										title    = 'Animations Salutations',
+										title    = 'Animations de salutations',
 										align    = 'top-left',
 										elements = {
 											{label = 'Saluer',  value = 'menuperso_actions_Salute_saluer'},
 											{label = 'Serrer la main',     value = 'menuperso_actions_Salute_serrerlamain'},
-											{label = 'Tape en 5',     value = 'menuperso_actions_Salute_tapeen5'},
-											{label = 'Salut Militaire',  value = 'menuperso_actions_Salute_salutmilitaire'},
+											{label = 'Tape m\'en 5',     value = 'menuperso_actions_Salute_tapeen5'},
+											{label = 'Salut militaire',  value = 'menuperso_actions_Salute_salutmilitaire'},
 										},
 									},
 									function(data3, menu3)
@@ -357,18 +355,18 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Humor',
 									{
-										title    = 'Animations Humeurs',
+										title    = 'Animations d\'humeurs',
 										align    = 'top-left',
 										elements = {
 											{label = 'Féliciter',  value = 'menuperso_actions_Humor_feliciter'},
 											{label = 'Super',     value = 'menuperso_actions_Humor_super'},
 											{label = 'Calme-toi',     value = 'menuperso_actions_Humor_calmetoi'},
 											{label = 'Avoir peur',  value = 'menuperso_actions_Humor_avoirpeur'},
-											{label = 'C\'est pas Possible!',  value = 'menuperso_actions_Humor_cestpaspossible'},
+											{label = 'C\'est pas possible !',  value = 'menuperso_actions_Humor_cestpaspossible'},
 											{label = 'Enlacer',  value = 'menuperso_actions_Humor_enlacer'},
 											{label = 'Doigt d\'honneur',  value = 'menuperso_actions_Humor_doightdhonneur'},
 											{label = 'Branleur',  value = 'menuperso_actions_Humor_branleur'},
-											{label = 'Balle dans la tete',  value = 'menuperso_actions_Humor_balledanslatete'},
+											{label = 'Balle dans la tête',  value = 'menuperso_actions_Humor_balledanslatete'},
 										},
 									},
 									function(data3, menu3)
@@ -420,7 +418,7 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Travail',
 									{
-										title    = 'Animations Travail',
+										title    = 'Animations de travail',
 										align    = 'top-left',
 										elements = {
 											{label = 'Pêcheur',  value = 'menuperso_actions_Travail_pecheur'},
@@ -463,12 +461,12 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Festives',
 									{
-										title    = 'Animations Festives',
+										title    = 'Animations festives',
 										align    = 'top-left',
 										elements = {
 											{label = 'Danser',  value = 'menuperso_actions_Festives_danser'},
 											{label = 'Jouer de la musique',     value = 'menuperso_actions_Festives_jouerdelamusique'},
-											{label = 'Boire une biere',     value = 'menuperso_actions_Festives_boireunebiere'},
+											{label = 'Boire une bière',     value = 'menuperso_actions_Festives_boireunebiere'},
 											{label = 'Air Guitar',  value = 'menuperso_actions_Festives_airguitar'},
 										},
 									},
@@ -501,25 +499,25 @@ function OpenPersonnelMenu()
 								ESX.UI.Menu.Open(
 									'default', GetCurrentResourceName(), 'menuperso_actions_Others',
 									{
-										title    = 'Animations Diverses',
+										title    = 'Animations diverses',
 										align    = 'top-left',
 										elements = {
 											{label = 'Fumer une clope',     value = 'menuperso_actions_Others_fumeruneclope'},
 											{label = 'Faire des pompes',     value = 'menuperso_actions_Others_fairedespompes'},
 											{label = 'Regarder aux jumelles',     value = 'menuperso_actions_Others_regarderauxjumelles'},
-											{label = 'Faire du Yoga',     value = 'menuperso_actions_Others_faireduyoga'},
+											{label = 'Faire du yoga',     value = 'menuperso_actions_Others_faireduyoga'},
 											{label = 'Faire la statue',     value = 'menuperso_actions_Others_fairelastatut'},
 											{label = 'Faire du jogging',     value = 'menuperso_actions_Others_fairedujogging'},
 											{label = 'Montrer ses muscles',     value = 'menuperso_actions_Others_fairedesetirements'},
 											{label = 'Racoller',     value = 'menuperso_actions_Others_racoller'},
 											{label = 'Racoller 2',     value = 'menuperso_actions_Others_racoller2'},
 											{label = 'S\'asseoir',     value = 'menuperso_actions_Others_sasseoir'},
-											{label = 'S\'asseoir (Par terre)',     value = 'menuperso_actions_Others_sasseoirparterre'},
+											{label = 'S\'asseoir (par terre)',     value = 'menuperso_actions_Others_sasseoirparterre'},
 											{label = 'Attendre',     value = 'menuperso_actions_Others_attendre'},
 											{label = 'Nettoyer quelque chose',     value = 'menuperso_actions_Others_nettoyerquelquechose'},
 											{label = 'Lever les mains',     value = 'menuperso_actions_Others_leverlesmains'},
-											{label = 'Position de Fouille',     value = 'menuperso_actions_Others_positiondefouille'},
-											{label = 'Se gratter les c**',     value = 'menuperso_actions_Others_segratterlesc'},
+											{label = 'Position de fouille',     value = 'menuperso_actions_Others_positiondefouille'},
+											{label = 'Se gratter les couilles',     value = 'menuperso_actions_Others_segratterlesc'},
 											{label = 'Prendre un selfie',     value = 'menuperso_actions_Others_prendreunselfie'},
 										},
 									},
@@ -610,181 +608,236 @@ function OpenPersonnelMenu()
 				end
 
 				if data.current.value == 'menuperso_vehicule' then
-
+				
+					local elements = {}
+					
+					if vehiculeON then
+						table.insert(elements, {label = 'Couper le moteur',			value = 'menuperso_vehicule_MoteurOff'})
+					else
+						table.insert(elements, {label = 'Démarrer le moteur',		value = 'menuperso_vehicule_MoteurOn'})
+					end
+					
+					if porteAvantGaucheOuverte then
+						table.insert(elements, {label = 'Fermer la porte gauche',	value = 'menuperso_vehicule_fermerportes_fermerportegauche'})
+					else
+						table.insert(elements, {label = 'Ouvrir la porte gauche',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportegauche'})
+					end
+					
+					if porteAvantDroiteOuverte then
+						table.insert(elements, {label = 'Fermer la porte droite',	value = 'menuperso_vehicule_fermerportes_fermerportedroite'})
+					else
+						table.insert(elements, {label = 'Ouvrir la porte droite',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportedroite'})
+					end
+					
+					if porteArriereGaucheOuverte then
+						table.insert(elements, {label = 'Fermer la porte arrière gauche',	value = 'menuperso_vehicule_fermerportes_fermerportearrieregauche'})
+					else
+						table.insert(elements, {label = 'Ouvrir la porte arrière gauche',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche'})
+					end
+					
+					if porteArriereDroiteOuverte then
+						table.insert(elements, {label = 'Fermer la porte arrière droite',	value = 'menuperso_vehicule_fermerportes_fermerportearrieredroite'})
+					else
+						table.insert(elements, {label = 'Ouvrir la porte arrière droite',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite'})
+					end
+					
+					if porteCapotOuvert then
+						table.insert(elements, {label = 'Fermer le capot',	value = 'menuperso_vehicule_fermerportes_fermercapot'})
+					else
+						table.insert(elements, {label = 'Ouvrir le capot',		value = 'menuperso_vehicule_ouvrirportes_ouvrircapot'})
+					end
+					
+					if porteCoffreOuvert then
+						table.insert(elements, {label = 'Fermer le coffre',	value = 'menuperso_vehicule_fermerportes_fermercoffre'})
+					else
+						table.insert(elements, {label = 'Ouvrir le coffre',		value = 'menuperso_vehicule_ouvrirportes_ouvrircoffre'})
+					end
+					
+					if porteAutre1Ouvert then
+						table.insert(elements, {label = 'Fermer autre 1',	value = 'menuperso_vehicule_fermerportes_fermerAutre1'})
+					else
+						table.insert(elements, {label = 'Ouvrir autre 1',		value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre1'})
+					end
+					
+					if porteAutre2Ouvert then
+						table.insert(elements, {label = 'Fermer autre 2',	value = 'menuperso_vehicule_fermerportes_fermerAutre2'})
+					else
+						table.insert(elements, {label = 'Ouvrir autre 2',		value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre2'})
+					end
+					
+					if porteToutOuvert then
+						table.insert(elements, {label = 'Tout fermer',	value = 'menuperso_vehicule_fermerportes_fermerTout'})
+					else
+						table.insert(elements, {label = 'Tout ouvrir',		value = 'menuperso_vehicule_ouvrirportes_ouvrirTout'})
+					end
+				
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_vehicule',
 						{
-							title    = 'Véhicule',
+							img    = 'menu_vehicule',
+							-- title    = 'Véhicule',
 							align    = 'top-left',
-							elements = {
-								{label = 'Ouvrir les portes',     value = 'menuperso_vehicule_ouvrirportes'},
-								{label = 'Fermer les portes',     value = 'menuperso_vehicule_fermerportes'},
-								{label = 'Demarrer le moteur',     value = 'menuperso_vehicule_MoteurOn'},
-								{label = 'Couper le moteur',     value = 'menuperso_vehicule_MoteurOff'},
-							},
+							elements = elements
 						},
 						function(data2, menu2)
-
+--------------------- GESTION MOTEUR
 							if data2.current.value == 'menuperso_vehicule_MoteurOn' then
-								local Action = true
-								vehicule_Moteur(Action)
+								vehiculeON = true
+								SetVehicleEngineOn(GetVehiclePedIsIn( GetPlayerPed(-1), false ), true, false, true)
+								SetVehicleUndriveable(GetVehiclePedIsIn( GetPlayerPed(-1), false ), false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
 							end
 
 							if data2.current.value == 'menuperso_vehicule_MoteurOff' then
-								local Action = false
-								vehicule_Moteur(Action)
+								vehiculeON = false
+								SetVehicleEngineOn(GetVehiclePedIsIn( GetPlayerPed(-1), false ), false, false, true)
+								SetVehicleUndriveable(GetVehiclePedIsIn( GetPlayerPed(-1), false ), true)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
+--------------------- OUVRIR LES PORTES
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportegauche' then
+								porteAvantGaucheOuverte = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
 							end
 
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes' then
-								ESX.UI.Menu.Open(
-									'default', GetCurrentResourceName(), 'menuperso_vehicule_ouvrirportes',
-									{
-										title    = 'Ouvrir Portes',
-										align    = 'top-left',
-										elements = {
-											{label = 'Ouvrir porte gauche',     value = 'menuperso_vehicule_ouvrirportes_ouvrirportegauche'},
-											{label = 'Ouvrir porte droite',     value = 'menuperso_vehicule_ouvrirportes_ouvrirportedroite'},
-											{label = 'Ouvrir porte arriere gauche',     value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche'},
-											{label = 'Ouvrir porte arriere droite',     value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite'},
-											{label = 'Ouvrir capot',     value = 'menuperso_vehicule_ouvrirportes_ouvrircapot'},
-											{label = 'Ouvrir coffre',     value = 'menuperso_vehicule_ouvrirportes_ouvrircoffre'},
-											{label = 'Ouvrir autre 1',     value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre1'},
-											{label = 'Ouvrir autre 2',     value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre2'},
-											{label = 'Ouvrir TOUT',     value = 'menuperso_vehicule_ouvrirportes_ouvrirTout'},
-										},
-									},
-									function(data3, menu3)
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportegauche' then
-											local porte = 0
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportedroite' then
-											local porte = 1
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche' then
-											local porte = 2
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite' then
-											local porte = 3
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircapot' then
-											local porte = 4
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircoffre' then
-											local porte = 5
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre1' then
-											local porte = 6
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre2' then
-											local porte = 7
-											vehicule_ouvrirporte(porte)
-										end
-
-										if data3.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirTout' then
-											local porte = 99
-											vehicule_ouvrirporte(porte)
-										end
-
-									end,
-									function(data3, menu3)
-										menu3.close()
-									end
-								)
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportedroite' then
+								porteAvantDroiteOuverte = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
 							end
 
-							if data2.current.value == 'menuperso_vehicule_fermerportes' then
-								ESX.UI.Menu.Open(
-									'default', GetCurrentResourceName(), 'menuperso_vehicule_fermerportes',
-									{
-										title    = 'Fermer Portes',
-										align    = 'top-left',
-										elements = {
-											{label = 'Fermer porte gauche',     value = 'menuperso_vehicule_fermerportes_fermerportegauche'},
-											{label = 'Fermer porte droite',     value = 'menuperso_vehicule_fermerportes_fermerportedroite'},
-											{label = 'Fermer porte arriere gauche',     value = 'menuperso_vehicule_fermerportes_fermerportearrieregauche'},
-											{label = 'Fermer porte arriere droite',     value = 'menuperso_vehicule_fermerportes_fermerportearrieredroite'},
-											{label = 'Fermer capot',     value = 'menuperso_vehicule_fermerportes_fermercapot'},
-											{label = 'Fermer coffre',     value = 'menuperso_vehicule_fermerportes_fermercoffre'},
-											{label = 'Fermer autre 1',     value = 'menuperso_vehicule_fermerportes_fermerAutre1'},
-											{label = 'Fermer autre 2',     value = 'menuperso_vehicule_fermerportes_fermerAutre2'},
-											{label = 'Fermer TOUT',     value = 'menuperso_vehicule_fermerportes_fermerTout'},
-										},
-									},
-									function(data3, menu3)
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche' then
+								porteArriereGaucheOuverte = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermerportegauche' then
-											local porte = 0
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite' then
+								porteArriereDroiteOuverte = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermerportedroite' then
-											local porte = 1
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircapot' then
+								porteCapotOuvert = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieregauche' then
-											local porte = 2
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircoffre' then
+								porteCoffreOuvert = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieredroite' then
-											local porte = 3
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre1' then
+								porteAutre1Ouvert = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermercapot' then
-											local porte = 4
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre2' then
+								porteAutre2Ouvert = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermercoffre' then
-											local porte = 5
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirTout' then
+								porteAvantGaucheOuverte = true
+								porteAvantDroiteOuverte = true
+								porteArriereGaucheOuverte = true
+								porteArriereDroiteOuverte = true
+								porteCapotOuvert = true
+								porteCoffreOuvert = true
+								porteAutre1Ouvert = true
+								porteAutre2Ouvert = true
+								porteToutOuvert = true
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
+--------------------- FERMER LES PORTES
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportegauche' then
+								porteAvantGaucheOuverte = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermerAutre1' then
-											local porte = 6
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportedroite' then
+								porteAvantDroiteOuverte = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermerAutre2' then
-											local porte = 7
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieregauche' then
+								porteArriereGaucheOuverte = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-										if data3.current.value == 'menuperso_vehicule_fermerportes_fermerTout' then
-											local porte = 99
-											vehicule_fermerporte(porte)
-										end
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieredroite' then
+								porteArriereDroiteOuverte = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 
-									end,
-									function(data3, menu3)
-										menu3.close()
-									end
-								)
-							end							
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermercapot' then
+								porteCapotOuvert = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
+
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermercoffre' then
+								porteCoffreOuvert = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
+
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerAutre1' then
+								porteAutre1Ouvert = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
+
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerAutre2' then
+								porteAutre2Ouvert = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
+
+							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerTout' then
+								porteAvantGaucheOuverte = false
+								porteAvantDroiteOuverte = false
+								porteArriereGaucheOuverte = false
+								porteArriereDroiteOuverte = false
+								porteCapotOuvert = false
+								porteCoffreOuvert = false
+								porteAutre1Ouvert = false
+								porteAutre2Ouvert = false
+								porteToutOuvert = false
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
+							end
 							
 						end,
 						function(data2, menu2)
 							menu2.close()
 						end
 					)
-
 				end
 
 				if data.current.value == 'menuperso_gpsrapide' then
@@ -795,8 +848,8 @@ function OpenPersonnelMenu()
 							align    = 'top-left',
 							elements = {
 								{label = 'Pôle emploi',     value = 'menuperso_gpsrapide_poleemploi'},
-								{label = 'Comissariat Principal',              value = 'menuperso_gpsrapide_comico'},
-								{label = 'Hopital Principal', value = 'menuperso_gpsrapide_hopital'},
+								{label = 'Comissariat principal',              value = 'menuperso_gpsrapide_comico'},
+								{label = 'Hôpital principal', value = 'menuperso_gpsrapide_hopital'},
 								{label = 'Concessionnaire',  value = 'menuperso_gpsrapide_concessionnaire'}
 							},
 						},
@@ -843,7 +896,7 @@ function OpenPersonnelMenu()
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_grade',
 						{
-							title    = 'Grade',
+							title    = 'Gestion d\'entreprise',
 							align    = 'top-left',
 							elements = {
 								{label = 'Recruter',     value = 'menuperso_grade_recruter'},
@@ -950,7 +1003,7 @@ end
 -- GOTO JOUEUR
 function admin_tp_toplayer()
 	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
-	Notify("~b~Entrez l'id du joueur...")
+	Notify("~b~Entrez l'ID du joueur...")
 	inputgoto = 1
 end
 
@@ -967,17 +1020,12 @@ Citizen.CreateThread(function()
 			end
 		end
 		if inputgoto == 2 then
-        --local x,y,z = getPosition()
-		local gotoply = GetOnscreenKeyboardResult()
-        --local tplayer = GetPlayerPed(GetPlayerFromServerId(id))
-        --x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(gotoply) , true))
-        -- x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(GetPlayerFromServerId(gotoply) , true)))
-        -- SetEntityCoords(GetPlayerPed(-1), x+0.0001, y+0.0001, z+0.0001, 1, 0, 0, 1)
-	    local playerPed = GetPlayerPed(-1)
-	    local teleportPed = GetEntityCoords(GetPlayerPed(GetPlayerFromServerId(tonumber(gotoply))))
-	    SetEntityCoords(playerPed, teleportPed)
-		
-        inputgoto = 0
+			local gotoply = GetOnscreenKeyboardResult()
+			local playerPed = GetPlayerPed(-1)
+			local teleportPed = GetEntityCoords(GetPlayerPed(GetPlayerFromServerId(tonumber(gotoply))))
+			SetEntityCoords(playerPed, teleportPed)
+			
+			inputgoto = 0
 		end
 	end
 end)
@@ -986,7 +1034,7 @@ end)
 -- TP UN JOUEUR A MOI
 function admin_tp_playertome()
 	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
-	Notify("~b~Entrez l'id du joueur...")
+	Notify("~b~Entrez l'ID du joueur...")
 	inputteleport = 1
 end
 
@@ -1003,11 +1051,12 @@ Citizen.CreateThread(function()
 			end
 		end
 		if inputteleport == 2 then
-		local teleportply = GetOnscreenKeyboardResult()
-	    local playerPed = GetPlayerFromServerId(tonumber(teleportply))
-	    local teleportPed = GetEntityCoords(GetPlayerPed(-1))
-	    SetEntityCoords(playerPed, teleportPed)
-		inputteleport = 0
+			local teleportply = GetOnscreenKeyboardResult()
+			local playerPed = GetPlayerFromServerId(tonumber(teleportply))
+			local teleportPed = GetEntityCoords(GetPlayerPed(-1))
+			SetEntityCoords(playerPed, teleportPed)
+			
+			inputteleport = 0
 		end
 	end
 end)
@@ -1129,10 +1178,10 @@ function admin_godmode()
   
   if godmode then -- activé
 		SetEntityInvincible(ped, true)
-		Notify("GodMode ~g~activé")
+		Notify("Mode invincible ~g~activé")
 	else
 		SetEntityInvincible(ped, false)
-		Notify("GodMode ~r~désactivé")
+		Notify("Mode invincible ~r~désactivé")
   end
 end
 -- FIN GOD MODE
@@ -1203,49 +1252,7 @@ Citizen.CreateThread(function()
 					SetNetworkIdCanMigrate(id, true)
 					SetVehRadioStation(veh, "OFF")
 					SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
-					Notify("Véhicule spawn, bonne route")
-				end)
-		
-        inputvehicle = 0
-		end
-	end
-end)
--- FIN Spawn vehicule
-
--- Spawn vehicule
-Citizen.CreateThread(function()
-	while true do
-		Wait(0)
-		if inputvehicle == 1 then
-			if UpdateOnscreenKeyboard() == 3 then
-				inputvehicle = 0
-			elseif UpdateOnscreenKeyboard() == 1 then
-					inputvehicle = 2
-			elseif UpdateOnscreenKeyboard() == 2 then
-				inputvehicle = 0
-			end
-		end
-		if inputvehicle == 2 then
-		local vehicleidd = GetOnscreenKeyboardResult()
-
-				local car = GetHashKey(vehicleidd)
-				
-				Citizen.CreateThread(function()
-					Citizen.Wait(10)
-					RequestModel(car)
-					while not HasModelLoaded(car) do
-						Citizen.Wait(0)
-					end
-                    local x,y,z = table.unpack(GetEntityCoords(GetPlayerPed(-1),true))
-					veh = CreateVehicle(car, x,y,z, 0.0, true, false)
-					SetEntityVelocity(veh, 2000)
-					SetVehicleOnGroundProperly(veh)
-					SetVehicleHasBeenOwnedByPlayer(veh,true)
-					local id = NetworkGetNetworkIdFromEntity(veh)
-					SetNetworkIdCanMigrate(id, true)
-					SetVehRadioStation(veh, "OFF")
-					SetPedIntoVehicle(GetPlayerPed(-1),  veh,  -1)
-					Notify("Véhicule spawn, bonne route")
+					Notify("Véhicule livré, bonne route")
 				end)
 		
         inputvehicle = 0
@@ -1276,7 +1283,7 @@ end
 -- GIVE DE L'ARGENT
 function admin_give_money()
 	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
-	Notify("~b~Entrez le montant a vous GIVE...")
+	Notify("~b~Entrez le montant à vous octroyer...")
 	inputmoney = 1
 end
 
@@ -1306,7 +1313,7 @@ end)
 -- GIVE DE L'ARGENT EN BANQUE
 function admin_give_bank()
 	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
-	Notify("~b~Entrez le montant a vous GIVE...")
+	Notify("~b~Entrez le montant à vous octroyer...")
 	inputmoneybank = 1
 end
 
@@ -1336,7 +1343,7 @@ end)
 -- GIVE DE L'ARGENT SALE
 function admin_give_dirty()
 	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
-	Notify("~b~Entrez le montant a vous GIVE...")
+	Notify("~b~Entrez le montant à vous octroyer...")
 	inputmoneydirty = 1
 end
 
@@ -1391,7 +1398,7 @@ function modo_showname()
 	if showname then
 		showname = false
 	else
-		Notify("Ouvrir et fermer le menu pause pour afficher les nom")
+		Notify("Ouvrir/Fermer le menu pause pour afficher les noms")
 		showname = true
 	end
 end
@@ -1433,9 +1440,9 @@ function admin_tp_marcker()
 				local coord = Citizen.InvokeNative(0xFA7C7F0AADF25D09, WaypointHandle, Citizen.ResultAsVector())
 				--SetEntityCoordsNoOffset(playerPed, coord.x, coord.y, coord.z, false, false, false, true)
 				SetEntityCoordsNoOffset(playerPed, coord.x, coord.y, -199.5, false, false, false, true)
-				Notify("Téléporté sur le marcker !")
+				Notify("Téléporté sur le marqueur !")
 			else
-				Notify("Pas de marcker sur la map !")
+				Notify("Pas de marqueur sur la carte !")
 			end
 		end
 		
@@ -1446,7 +1453,7 @@ end
 -- HEAL JOUEUR
 function admin_heal_player()
 	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
-	Notify("~b~Entrez l'id du joueur...")
+	Notify("~b~Entrez l'ID du joueur...")
 	inputheal = 1
 end
 
@@ -1475,7 +1482,7 @@ end)
 -- SPEC JOUEUR
 function admin_spec_player()
 	DisplayOnscreenKeyboard(true, "FMMC_KEY_TIP8", "", "", "", "", "", 120)
-	Notify("~b~Entrez l'id du joueur...")
+	Notify("~b~Entrez l'ID du joueur...")
 	inputspec = 1
 end
 
@@ -1595,164 +1602,6 @@ function animsActionScenario(animObj)
 	end
 end
 
----------------------------------------------------------------------------Véhicule
-
-function vehicule_Moteur(Action)
-	if (IsInVehicle()) then
-		local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
-		if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
-			SetVehicleEngineOn(vehicle, Action, false, true)
-			if Action then
-				SetVehicleUndriveable(vehicle, false)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Moteur démarré !")
-			else
-				SetVehicleUndriveable(vehicle, true)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Moteur coupé !")
-			end
-		else
-			local source = GetPlayerServerId();
-				ESX.ShowNotification("Vous devez etre a la place du conducteur !")
-		end
-	else
-		local source = GetPlayerServerId();
-				ESX.ShowNotification("Vous devez etre dans un véhicule !")
-	end
-end
-
-function OuvrirLaPorte(porte, vehicle)
-	SetVehicleDoorOpen(vehicle, porte, false, false)
-end
-
-function OuvrirTOUTPorte(porte, vehicle)
-	SetVehicleDoorOpen(vehicle, 0, false, false)
-	SetVehicleDoorOpen(vehicle, 1, false, false)
-	SetVehicleDoorOpen(vehicle, 2, false, false)
-	SetVehicleDoorOpen(vehicle, 3, false, false)
-	SetVehicleDoorOpen(vehicle, 4, false, false)
-	SetVehicleDoorOpen(vehicle, 5, false, false)
-	SetVehicleDoorOpen(vehicle, 6, false, false)
-	SetVehicleDoorOpen(vehicle, 7, false, false)
-end
-
-function vehicule_ouvrirporte(porte)
-	if (IsInVehicle()) then
-		local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
-		if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
-			if porte == 0 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte avant gauche : Ouverte")
-			elseif porte == 1 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte avant droite : Ouverte")
-			elseif porte == 2 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte arrière gauche : Ouverte")
-			elseif porte == 3 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte arrière droite : Ouverte")
-			elseif porte == 4 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Capot : Ouvert")
-			elseif porte == 5 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Capot : Ouvert")
-			elseif porte == 6 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Autre 1 : Ouvert")
-			elseif porte == 7 then
-				OuvrirLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Autre 2 : Ouvert")
-			elseif porte == 99 then
-				OuvrirTOUTPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Tout : Ouvert")
-			end
-		else
-			local source = GetPlayerServerId();
-			ESX.ShowNotification("Vous devez etre a la place du conducteur !")
-		end
-	else
-		local source = GetPlayerServerId();
-		ESX.ShowNotification("Vous devez etre dans un véhicule pour faire cela !")
-	end
-end
-
-function FermerLaPorte(porte, vehicle)
-	SetVehicleDoorShut(vehicle, porte, false, false)
-end
-
-function FermerTOUTPorte(porte, vehicle)
-	SetVehicleDoorShut(vehicle, 0, false, false)
-	SetVehicleDoorShut(vehicle, 1, false, false)
-	SetVehicleDoorShut(vehicle, 2, false, false)
-	SetVehicleDoorShut(vehicle, 3, false, false)
-	SetVehicleDoorShut(vehicle, 4, false, false)
-	SetVehicleDoorShut(vehicle, 5, false, false)
-	SetVehicleDoorShut(vehicle, 6, false, false)
-	SetVehicleDoorShut(vehicle, 7, false, false)
-end
-
-function vehicule_fermerporte(porte)
-	if (IsInVehicle()) then
-		local vehicle = GetVehiclePedIsIn( GetPlayerPed(-1), false )
-		if ( GetPedInVehicleSeat( vehicle, -1 ) == GetPlayerPed(-1) ) then
-			if porte == 0 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte avant gauche : Fermé")
-			elseif porte == 1 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte avant droite : Fermé")
-			elseif porte == 2 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte arrière gauche : Fermé")
-			elseif porte == 3 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Porte arrière droite : Fermé")
-			elseif porte == 4 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Capot : Fermé")
-			elseif porte == 5 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Capot : Fermé")
-			elseif porte == 6 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Autre 1 : Fermé")
-			elseif porte == 7 then
-				FermerLaPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Autre 2 : Fermé")
-			elseif porte == 99 then
-				FermerTOUTPorte(porte, vehicle)
-				local source = GetPlayerServerId();
-				ESX.ShowNotification("Tout : Fermé")
-			end
-		else
-			local source = GetPlayerServerId();
-			ESX.ShowNotification("Vous devez etre a la place du conducteur !")
-		end
-	else
-		local source = GetPlayerServerId();
-		ESX.ShowNotification("Vous devez etre dans un véhicule pour faire cela !")
-	end
-end
-
 -- Verifie si le joueurs est dans un vehicule ou pas
 function IsInVehicle()
 	local ply = GetPlayerPed(-1)
@@ -1806,11 +1655,6 @@ AddEventHandler('NB:closeMenuPersonnel', function()
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions')
 		
 	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule') then
-		if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule_ouvrirportes') then
-			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_vehicule_ouvrirportes')
-		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule_fermerportes') then
-			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_vehicule_fermerportes')
-		end
 		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_vehicule')
 		
 	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_gpsrapide') then
