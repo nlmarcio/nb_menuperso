@@ -24,7 +24,7 @@ https://github.com/FXServer-ESX/fxserver-esx_mecanojob<br>
 
 ## INSTALLATION
 Copier le dossier "nb_menuperso" dans resources<br>
-Ajouter "start nb_menuperso" dans votre serveur.cfg<br>
+Ajouter "start nb_menuperso" dans votre serveur.cfg apres tous les autre start, ce script doit être démarrer en dernier.<br>
 
 ## Lignes a modifier dans d'autres scripts
 __####################__<br>
