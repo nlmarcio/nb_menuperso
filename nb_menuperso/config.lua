@@ -26,21 +26,6 @@ Config.menujob = {
 	manette1 = Keys["SPACE"],
 	manette2 = Keys["DOWN"],
 }
--- Ouvrir l'inventaire
-Config.inventaire = {
-	clavier1 = Keys["LEFTSHIFT"],
-	clavier2 = Keys["R"],
-}
--- Ouvrir le telephone
-Config.phone = {
-	clavier1 = Keys["LEFTSHIFT"],
-	clavier2 = Keys["T"],
-}
--- Ouvrir les factures
-Config.billing = {
-	clavier1 = Keys["LEFTSHIFT"],
-	clavier2 = Keys["Y"],
-}
 -- TP sur le Marker
 Config.TPMarker = {
 	clavier1 = Keys["LEFTSHIFT"],
@@ -50,7 +35,7 @@ Config.TPMarker = {
 }
 -- Lever les mains
 Config.handsUP = {
-	clavier = Keys["N"],
+	clavier = Keys["~"],
 	manette1 = Keys["RIGHT"],
 	manette2 = Keys["F2"],
 }

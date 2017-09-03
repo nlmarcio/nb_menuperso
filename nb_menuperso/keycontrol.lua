@@ -38,6 +38,26 @@ end)
 Citizen.CreateThread(function()
 	while true do
 		Wait(0)
+		
+--------------------------------------------------------------------------------------------
+-- TP MARCKER
+--------------------------------------------------------------------------------------------
+		
+		if (IsControlPressed(1, Config.TPMarker.clavier1) and IsControlPressed(1, Config.TPMarker.clavier2) and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('NB:closeAllSubMenu')
+			TriggerEvent('NB:closeAllMenu')
+			TriggerEvent('NB:goTpMarcker')
+			GUI.Time  = GetGameTimer()
+		end
+		
+--------------------------------------- MANETTE
+
+		if (IsControlPressed(2, Config.TPMarker.manette1) and IsControlPressed(2, Config.TPMarker.manette2) and (GetGameTimer() - GUI.Time) > 150) then
+			TriggerEvent('NB:closeAllSubMenu')
+			TriggerEvent('NB:closeAllMenu')
+			TriggerEvent('NB:goTpMarcker')
+			GUI.Time  = GetGameTimer()
+		end
 
 --------------------------------------------------------------------------------------------
 -- Menu personnel -> nb_menuperso
@@ -70,78 +90,7 @@ Citizen.CreateThread(function()
 			TriggerEvent('NB:closeAllMenu')
 			GUI.Time  = GetGameTimer()
 		end
-
--------------------------
--- TP MARCKER
--------------------------
 		
-		if (IsControlPressed(1, Config.TPMarker.clavier1) and IsControlPressed(1, Config.TPMarker.clavier2) and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			TriggerEvent('NB:goTpMarcker')
-			GUI.Time  = GetGameTimer()
-		end
-		
---------------------------------------- MANETTE
-
-		if (IsControlPressed(2, Config.TPMarker.manette1) and IsControlPressed(2, Config.TPMarker.manette2) and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			TriggerEvent('NB:goTpMarcker')
-			GUI.Time  = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu inventaire -> es_extended
---------------------------------------------------------------------------------------------
-
-		if (IsControlPressed(1, Config.inventaire.clavier1) and IsControlPressed(1, Config.inventaire.clavier2) and not ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			TriggerEvent('NB:openMenuInventaire')
-			GUI.Time = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Config.inventaire.clavier1) and IsControlPressed(1, Config.inventaire.clavier2) and ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') and (GetGameTimer() - GUI.Time) > 150)  then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			GUI.Time  = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu telephone -> esx_phone
---------------------------------------------------------------------------------------------
-		
-		if (IsControlPressed(1, Config.phone.clavier1) and IsControlPressed(1, Config.phone.clavier2) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			TriggerEvent('NB:openMenuTelephone')
-			GUI.Time = GetGameTimer()
-		end
-		
-		if (IsControlPressed(1, Config.phone.clavier1) and IsControlPressed(1, Config.phone.clavier2) and not ESX.UI.Menu.IsOpen('phone', 'esx_phone', 'main') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			GUI.Time = GetGameTimer()
-		end
-
---------------------------------------------------------------------------------------------
--- Menu factures -> esx_billing
---------------------------------------------------------------------------------------------
-		
-		if (IsControlPressed(1, Config.billing.clavier1) and IsControlPressed(1, Config.billing.clavier2) and not ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			TriggerEvent('NB:openMenuFactures')
-			GUI.Time = GetGameTimer()
-		end
-
-		if (IsControlPressed(1, Config.billing.clavier1) and IsControlPressed(1, Config.billing.clavier2) and ESX.UI.Menu.IsOpen('default', 'esx_billing', 'billing') and (GetGameTimer() - GUI.Time) > 150) then
-			TriggerEvent('NB:closeAllSubMenu')
-			TriggerEvent('NB:closeAllMenu')
-			GUI.Time = GetGameTimer()
-		end
-
 --------------------------------------------------------------------------------------------
 -- Menu police -> esx_policejob
 --------------------------------------------------------------------------------------------
