@@ -11,7 +11,8 @@ Pour lever les mains avec la manette : Fleche de droite + X<br>
 Pour s'accroupir depuis le clavier : Ctrl gauche<br>
 Pour s'accroupir avec la manette : Clic joystick gauche<br>
 Pour pointer du doigt depuis le clavier : B<br>
-Pour pointer du doigt avec la manette : Clic joystick droit<br>
+Pour pointer du doigt avec la manette : Clic joystick droit<br><br>
+Si besoin changer les points GPS dans le fichier config.lua<br>
 
 ## NECESSAIRE
 https://github.com/indilo53/fivem-es_extended<br>

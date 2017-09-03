@@ -75,7 +75,7 @@ function OpenPersonnelMenu()
 			table.insert(elements, {label = 'Gestion d\'entreprise',			value = 'menuperso_grade'})
 		end
 				
-		if (playergroup == 'mod') or (playergroup == 'admin') or (playergroup == 'owner') then
+		if playergroup == 'mod' or playergroup == 'admin' or playergroup == 'superadmin' or playergroup == 'owner' then
 			table.insert(elements, {label = 'Modération',				value = 'menuperso_modo'})
 		end
 		
@@ -134,7 +134,7 @@ function OpenPersonnelMenu()
 					table.insert(elements, {label = 'Sauvegarder l\'apparence',									value = 'menuperso_modo_save_skin'})
 				end
 			
-				if playergroup == 'owner' then
+				if playergroup == 'superadmin' or playergroup == 'owner' then
 					table.insert(elements, {label = 'TP sur joueur',    							value = 'menuperso_modo_tp_toplayer'})
 					table.insert(elements, {label = 'TP joueur sur moi',             			value = 'menuperso_modo_tp_playertome'})
 					table.insert(elements, {label = 'TP sur coordonées [WIP]',						value = 'menuperso_modo_tp_pos'})
@@ -243,6 +243,10 @@ function OpenPersonnelMenu()
 							menu2.close()
 						end
 					)
+				end
+				
+				if data.current.value == 'menuperso_vehicule' then
+					OpenVehiculeMenu()
 				end
 
 				if data.current.value == 'menuperso_moi' then
@@ -607,239 +611,6 @@ function OpenPersonnelMenu()
 
 				end
 
-				if data.current.value == 'menuperso_vehicule' then
-				
-					local elements = {}
-					
-					if vehiculeON then
-						table.insert(elements, {label = 'Couper le moteur',			value = 'menuperso_vehicule_MoteurOff'})
-					else
-						table.insert(elements, {label = 'Démarrer le moteur',		value = 'menuperso_vehicule_MoteurOn'})
-					end
-					
-					if porteAvantGaucheOuverte then
-						table.insert(elements, {label = 'Fermer la porte gauche',	value = 'menuperso_vehicule_fermerportes_fermerportegauche'})
-					else
-						table.insert(elements, {label = 'Ouvrir la porte gauche',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportegauche'})
-					end
-					
-					if porteAvantDroiteOuverte then
-						table.insert(elements, {label = 'Fermer la porte droite',	value = 'menuperso_vehicule_fermerportes_fermerportedroite'})
-					else
-						table.insert(elements, {label = 'Ouvrir la porte droite',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportedroite'})
-					end
-					
-					if porteArriereGaucheOuverte then
-						table.insert(elements, {label = 'Fermer la porte arrière gauche',	value = 'menuperso_vehicule_fermerportes_fermerportearrieregauche'})
-					else
-						table.insert(elements, {label = 'Ouvrir la porte arrière gauche',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche'})
-					end
-					
-					if porteArriereDroiteOuverte then
-						table.insert(elements, {label = 'Fermer la porte arrière droite',	value = 'menuperso_vehicule_fermerportes_fermerportearrieredroite'})
-					else
-						table.insert(elements, {label = 'Ouvrir la porte arrière droite',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite'})
-					end
-					
-					if porteCapotOuvert then
-						table.insert(elements, {label = 'Fermer le capot',	value = 'menuperso_vehicule_fermerportes_fermercapot'})
-					else
-						table.insert(elements, {label = 'Ouvrir le capot',		value = 'menuperso_vehicule_ouvrirportes_ouvrircapot'})
-					end
-					
-					if porteCoffreOuvert then
-						table.insert(elements, {label = 'Fermer le coffre',	value = 'menuperso_vehicule_fermerportes_fermercoffre'})
-					else
-						table.insert(elements, {label = 'Ouvrir le coffre',		value = 'menuperso_vehicule_ouvrirportes_ouvrircoffre'})
-					end
-					
-					if porteAutre1Ouvert then
-						table.insert(elements, {label = 'Fermer autre 1',	value = 'menuperso_vehicule_fermerportes_fermerAutre1'})
-					else
-						table.insert(elements, {label = 'Ouvrir autre 1',		value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre1'})
-					end
-					
-					if porteAutre2Ouvert then
-						table.insert(elements, {label = 'Fermer autre 2',	value = 'menuperso_vehicule_fermerportes_fermerAutre2'})
-					else
-						table.insert(elements, {label = 'Ouvrir autre 2',		value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre2'})
-					end
-					
-					if porteToutOuvert then
-						table.insert(elements, {label = 'Tout fermer',	value = 'menuperso_vehicule_fermerportes_fermerTout'})
-					else
-						table.insert(elements, {label = 'Tout ouvrir',		value = 'menuperso_vehicule_ouvrirportes_ouvrirTout'})
-					end
-				
-					ESX.UI.Menu.Open(
-						'default', GetCurrentResourceName(), 'menuperso_vehicule',
-						{
-							img    = 'menu_vehicule',
-							-- title    = 'Véhicule',
-							align    = 'top-left',
-							elements = elements
-						},
-						function(data2, menu2)
---------------------- GESTION MOTEUR
-							if data2.current.value == 'menuperso_vehicule_MoteurOn' then
-								vehiculeON = true
-								SetVehicleEngineOn(GetVehiclePedIsIn( GetPlayerPed(-1), false ), true, false, true)
-								SetVehicleUndriveable(GetVehiclePedIsIn( GetPlayerPed(-1), false ), false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_MoteurOff' then
-								vehiculeON = false
-								SetVehicleEngineOn(GetVehiclePedIsIn( GetPlayerPed(-1), false ), false, false, true)
-								SetVehicleUndriveable(GetVehiclePedIsIn( GetPlayerPed(-1), false ), true)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
---------------------- OUVRIR LES PORTES
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportegauche' then
-								porteAvantGaucheOuverte = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportedroite' then
-								porteAvantDroiteOuverte = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche' then
-								porteArriereGaucheOuverte = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite' then
-								porteArriereDroiteOuverte = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircapot' then
-								porteCapotOuvert = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircoffre' then
-								porteCoffreOuvert = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre1' then
-								porteAutre1Ouvert = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre2' then
-								porteAutre2Ouvert = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirTout' then
-								porteAvantGaucheOuverte = true
-								porteAvantDroiteOuverte = true
-								porteArriereGaucheOuverte = true
-								porteArriereDroiteOuverte = true
-								porteCapotOuvert = true
-								porteCoffreOuvert = true
-								porteAutre1Ouvert = true
-								porteAutre2Ouvert = true
-								porteToutOuvert = true
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
-								SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
---------------------- FERMER LES PORTES
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportegauche' then
-								porteAvantGaucheOuverte = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportedroite' then
-								porteAvantDroiteOuverte = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieregauche' then
-								porteArriereGaucheOuverte = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieredroite' then
-								porteArriereDroiteOuverte = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermercapot' then
-								porteCapotOuvert = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermercoffre' then
-								porteCoffreOuvert = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerAutre1' then
-								porteAutre1Ouvert = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerAutre2' then
-								porteAutre2Ouvert = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-
-							if data2.current.value == 'menuperso_vehicule_fermerportes_fermerTout' then
-								porteAvantGaucheOuverte = false
-								porteAvantDroiteOuverte = false
-								porteArriereGaucheOuverte = false
-								porteArriereDroiteOuverte = false
-								porteCapotOuvert = false
-								porteCoffreOuvert = false
-								porteAutre1Ouvert = false
-								porteAutre2Ouvert = false
-								porteToutOuvert = false
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
-								SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
-								ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'menuperso_vehicule')
-							end
-							
-						end,
-						function(data2, menu2)
-							menu2.close()
-						end
-					)
-				end
-
 				if data.current.value == 'menuperso_gpsrapide' then
 					ESX.UI.Menu.Open(
 						'default', GetCurrentResourceName(), 'menuperso_gpsrapide',
@@ -856,28 +627,28 @@ function OpenPersonnelMenu()
 						function(data2, menu2)
 
 							if data2.current.value == 'menuperso_gpsrapide_poleemploi' then
-								x, y, z = -259.08557128906, -974.677734375, 31.220008850098
+								x, y, z = Config.poleemploi.x, Config.poleemploi.y, Config.poleemploi.z
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
 								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
 
 							if data2.current.value == 'menuperso_gpsrapide_comico' then
-								x, y, z = -44.385055541992, -1109.7479248047, 26.437595367432
+								x, y, z = Config.comico.x, Config.comico.y, Config.comico.z
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
 								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
 
 							if data2.current.value == 'menuperso_gpsrapide_hopital' then
-								x, y, z = 430.91763305664, -980.24694824218, 31.710563659668
+								x, y, z = Config.hopital.x, Config.hopital.y, Config.hopital.z
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
 								ESX.ShowNotification("Destination ajouté au GPS !")
 							end
 
 							if data2.current.value == 'menuperso_gpsrapide_concessionnaire' then
-								x, y, z = 336.87603759766, -1396.2689208984, 23.509273529053
+								x, y, z = Config.concessionnaire.x, Config.concessionnaire.y, Config.concessionnaire.z
 								SetNewWaypoint(x, y, z)
 								local source = GetPlayerServerId();
 								ESX.ShowNotification("Destination ajouté au GPS !")
@@ -996,7 +767,243 @@ function OpenPersonnelMenu()
 		
 	end)
 end
+
+---------------------------------------------------------------------------Vehicule Menu
+
+function OpenVehiculeMenu()
 	
+	ESX.UI.Menu.CloseAll()
+		
+	local elements = {}
+	
+	if vehiculeON then
+		table.insert(elements, {label = 'Couper le moteur',			value = 'menuperso_vehicule_MoteurOff'})
+	else
+		table.insert(elements, {label = 'Démarrer le moteur',		value = 'menuperso_vehicule_MoteurOn'})
+	end
+	
+	if porteAvantGaucheOuverte then
+		table.insert(elements, {label = 'Fermer la porte gauche',	value = 'menuperso_vehicule_fermerportes_fermerportegauche'})
+	else
+		table.insert(elements, {label = 'Ouvrir la porte gauche',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportegauche'})
+	end
+	
+	if porteAvantDroiteOuverte then
+		table.insert(elements, {label = 'Fermer la porte droite',	value = 'menuperso_vehicule_fermerportes_fermerportedroite'})
+	else
+		table.insert(elements, {label = 'Ouvrir la porte droite',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportedroite'})
+	end
+	
+	if porteArriereGaucheOuverte then
+		table.insert(elements, {label = 'Fermer la porte arrière gauche',	value = 'menuperso_vehicule_fermerportes_fermerportearrieregauche'})
+	else
+		table.insert(elements, {label = 'Ouvrir la porte arrière gauche',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche'})
+	end
+	
+	if porteArriereDroiteOuverte then
+		table.insert(elements, {label = 'Fermer la porte arrière droite',	value = 'menuperso_vehicule_fermerportes_fermerportearrieredroite'})
+	else
+		table.insert(elements, {label = 'Ouvrir la porte arrière droite',		value = 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite'})
+	end
+	
+	if porteCapotOuvert then
+		table.insert(elements, {label = 'Fermer le capot',	value = 'menuperso_vehicule_fermerportes_fermercapot'})
+	else
+		table.insert(elements, {label = 'Ouvrir le capot',		value = 'menuperso_vehicule_ouvrirportes_ouvrircapot'})
+	end
+	
+	if porteCoffreOuvert then
+		table.insert(elements, {label = 'Fermer le coffre',	value = 'menuperso_vehicule_fermerportes_fermercoffre'})
+	else
+		table.insert(elements, {label = 'Ouvrir le coffre',		value = 'menuperso_vehicule_ouvrirportes_ouvrircoffre'})
+	end
+	
+	if porteAutre1Ouvert then
+		table.insert(elements, {label = 'Fermer autre 1',	value = 'menuperso_vehicule_fermerportes_fermerAutre1'})
+	else
+		table.insert(elements, {label = 'Ouvrir autre 1',		value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre1'})
+	end
+	
+	if porteAutre2Ouvert then
+		table.insert(elements, {label = 'Fermer autre 2',	value = 'menuperso_vehicule_fermerportes_fermerAutre2'})
+	else
+		table.insert(elements, {label = 'Ouvrir autre 2',		value = 'menuperso_vehicule_ouvrirportes_ouvrirAutre2'})
+	end
+	
+	if porteToutOuvert then
+		table.insert(elements, {label = 'Tout fermer',	value = 'menuperso_vehicule_fermerportes_fermerTout'})
+	else
+		table.insert(elements, {label = 'Tout ouvrir',		value = 'menuperso_vehicule_ouvrirportes_ouvrirTout'})
+	end
+
+	ESX.UI.Menu.Open(
+		'default', GetCurrentResourceName(), 'menuperso_vehicule',
+		{
+			img    = 'menu_vehicule',
+			-- title    = 'Véhicule',
+			align    = 'top-left',
+			elements = elements
+		},
+		function(data, menu)
+--------------------- GESTION MOTEUR
+			if data.current.value == 'menuperso_vehicule_MoteurOn' then
+				vehiculeON = true
+				SetVehicleEngineOn(GetVehiclePedIsIn( GetPlayerPed(-1), false ), true, false, true)
+				SetVehicleUndriveable(GetVehiclePedIsIn( GetPlayerPed(-1), false ), false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_MoteurOff' then
+				vehiculeON = false
+				SetVehicleEngineOn(GetVehiclePedIsIn( GetPlayerPed(-1), false ), false, false, true)
+				SetVehicleUndriveable(GetVehiclePedIsIn( GetPlayerPed(-1), false ), true)
+				OpenVehiculeMenu()
+			end
+--------------------- OUVRIR LES PORTES
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportegauche' then
+				porteAvantGaucheOuverte = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportedroite' then
+				porteAvantDroiteOuverte = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieregauche' then
+				porteArriereGaucheOuverte = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirportearrieredroite' then
+				porteArriereDroiteOuverte = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircapot' then
+				porteCapotOuvert = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrircoffre' then
+				porteCoffreOuvert = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre1' then
+				porteAutre1Ouvert = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirAutre2' then
+				porteAutre2Ouvert = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_ouvrirportes_ouvrirTout' then
+				porteAvantGaucheOuverte = true
+				porteAvantDroiteOuverte = true
+				porteArriereGaucheOuverte = true
+				porteArriereDroiteOuverte = true
+				porteCapotOuvert = true
+				porteCoffreOuvert = true
+				porteAutre1Ouvert = true
+				porteAutre2Ouvert = true
+				porteToutOuvert = true
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+				SetVehicleDoorOpen(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+				OpenVehiculeMenu()
+			end
+--------------------- FERMER LES PORTES
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermerportegauche' then
+				porteAvantGaucheOuverte = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermerportedroite' then
+				porteAvantDroiteOuverte = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieregauche' then
+				porteArriereGaucheOuverte = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermerportearrieredroite' then
+				porteArriereDroiteOuverte = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermercapot' then
+				porteCapotOuvert = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermercoffre' then
+				porteCoffreOuvert = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermerAutre1' then
+				porteAutre1Ouvert = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermerAutre2' then
+				porteAutre2Ouvert = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+				OpenVehiculeMenu()
+			end
+
+			if data.current.value == 'menuperso_vehicule_fermerportes_fermerTout' then
+				porteAvantGaucheOuverte = false
+				porteAvantDroiteOuverte = false
+				porteArriereGaucheOuverte = false
+				porteArriereDroiteOuverte = false
+				porteCapotOuvert = false
+				porteCoffreOuvert = false
+				porteAutre1Ouvert = false
+				porteAutre2Ouvert = false
+				porteToutOuvert = false
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 0, false, false)
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 1, false, false)
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 2, false, false)
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 3, false, false)
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 4, false, false)
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 5, false, false)
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 6, false, false)
+				SetVehicleDoorShut(GetVehiclePedIsIn( GetPlayerPed(-1), false ), 7, false, false)
+				OpenVehiculeMenu()
+			end
+			
+		end,
+		function(data, menu)
+			menu.close()
+		end
+	)
+end
 
 ---------------------------------------------------------------------------Modération
 
@@ -1433,7 +1440,7 @@ function admin_tp_marcker()
 	ESX.TriggerServerCallback('NB:getUsergroup', function(group)
 		playergroup = group
 		
-		if playergroup == 'admin' or playergroup == 'owner' then
+		if playergroup == 'admin' or playergroup == 'superadmin' or playergroup == 'owner' then
 			local playerPed = GetPlayerPed(-1)
 			local WaypointHandle = GetFirstBlipInfoId(8)
 			if DoesBlipExist(WaypointHandle) then
