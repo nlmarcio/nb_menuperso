@@ -74,22 +74,6 @@ RegisterNetEvent('NB:openMenuInventaire')
 AddEventHandler('NB:openMenuInventaire', function()
 	ESX.ShowInventory()
 end)
-
-RegisterNetEvent('NB:closeMenuInventaire')
-AddEventHandler('NB:closeMenuInventaire', function()
-	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'inventory') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'inventory')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'inventory_item') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'inventory_item')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'inventory_item_count_give') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'inventory_item_count_give')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'inventory_item_count_remove') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'inventory_item_count_remove')
-	end
-end)
 ```
 __####################__<br>
 __Dans esx_phone :__<br>
@@ -118,11 +102,6 @@ puis ajouter ces lignes en fin de script :<br>
 RegisterNetEvent('NB:openMenuTelephone')
 AddEventHandler('NB:openMenuTelephone', function()
 	ESX.UI.Menu.Open('phone', GetCurrentResourceName(), 'main')
-end)
-
-RegisterNetEvent('NB:closeMenuTelephone')
-AddEventHandler('NB:closeMenuTelephone', function()
-	TriggerEvent('NB:closeAllMenu')
 end)
 ```
 __####################__<br>
@@ -154,11 +133,6 @@ RegisterNetEvent('NB:openMenuFactures')
 AddEventHandler('NB:openMenuFactures', function()
   	ShowBillsMenu()
 end)
-
-RegisterNetEvent('NB:closeMenuFactures')
-AddEventHandler('NB:closeMenuFactures', function()
-	TriggerEvent('NB:closeAllMenu')
-end)
 ```
 __####################__<br>
 __Dans esx_policejob :__<br>
@@ -179,19 +153,6 @@ puis ajouter ces lignes en fin de script :<br>
 RegisterNetEvent('NB:openMenuPolice')
 AddEventHandler('NB:openMenuPolice', function()
 	OpenPoliceActionsMenu()
-end)
-
-RegisterNetEvent('NB:closeMenuPolice')
-AddEventHandler('NB:closeMenuPolice', function()
-	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'vehicle_interaction') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'vehicle_interaction')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'object_spawner') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'object_spawner')
-	end
 end)
 ```
 __####################__<br>
@@ -214,13 +175,6 @@ RegisterNetEvent('NB:openMenuAmbulance')
 AddEventHandler('NB:openMenuAmbulance', function()
 	OpenMobileAmbulanceActionsMenu()
 end)
-
-RegisterNetEvent('NB:closeMenuAmbulance')
-AddEventHandler('NB:closeMenuAmbulance', function()
-	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
-	end
-end)
 ```
 __####################__<br>
 __Dans esx_mecanojob :__<br>
@@ -240,13 +194,6 @@ puis ajouter ces lignes en fin de script :
 RegisterNetEvent('NB:openMenuMecano')
 AddEventHandler('NB:openMenuMecano', function()
 	OpenMobileMecanoActionsMenu()
-end)
-
-RegisterNetEvent('NB:closeMenuMecano')
-AddEventHandler('NB:closeMenuMecano', function()
-	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'citizen_interaction') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'citizen_interaction')
-	end
 end)
 ```
 ## Attention : Ce script est optimisable et peut etre mis a jour a tout moment.

@@ -205,7 +205,107 @@ AddEventHandler('NB:closeAllMenu', function()
 	ESX.UI.Menu.CloseAll()
 end)
 
+--------------------------------------------------------------------------------------------
+-- Fermeture des Menu
+--------------------------------------------------------------------------------------------
+-- Menu Perso
+RegisterNetEvent('NB:closeMenuPersonnel')
+AddEventHandler('NB:closeMenuPersonnel', function()
+
+	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_moi') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_moi')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions') then
+		if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Salute') then
+			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Salute')
+		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Humor') then
+			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Humor')
+		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Travail') then
+			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Travail')
+		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Festives') then
+			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Festives')
+		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Others') then
+			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Others')
+		end
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_vehicule')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_gpsrapide') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_gpsrapide')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_grade') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_grade')
+		
+	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_modo') then
+		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_modo')
+		
+	end
+end)
+
+-- Inventaire
+RegisterNetEvent('NB:closeMenuInventaire')
+AddEventHandler('NB:closeMenuInventaire', function()
+	if ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory') then
+		ESX.UI.Menu.Close('default', 'es_extended', 'inventory')
+		
+	elseif ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory_item') then
+		ESX.UI.Menu.Close('default', 'es_extended', 'inventory_item')
+		
+	elseif ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory_item_count_give') then
+		ESX.UI.Menu.Close('default', 'es_extended', 'inventory_item_count_give')
+		
+	elseif ESX.UI.Menu.IsOpen('default', 'es_extended', 'inventory_item_count_remove') then
+		ESX.UI.Menu.Close('default', 'es_extended', 'inventory_item_count_remove')
+	end
+end)
+
+-- Telephone
+RegisterNetEvent('NB:closeMenuTelephone')
+AddEventHandler('NB:closeMenuTelephone', function()
+	TriggerEvent('NB:closeAllMenu')
+end)
+
+-- Factures
+RegisterNetEvent('NB:closeMenuFactures')
+AddEventHandler('NB:closeMenuFactures', function()
+	TriggerEvent('NB:closeAllMenu')
+end)
+
+-- Police
+RegisterNetEvent('NB:closeMenuPolice')
+AddEventHandler('NB:closeMenuPolice', function()
+	if ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'citizen_interaction') then
+		ESX.UI.Menu.Close('default', 'esx_policejob', 'citizen_interaction')
+		
+	elseif ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'vehicle_interaction') then
+		ESX.UI.Menu.Close('default', 'esx_policejob', 'vehicle_interaction')
+		
+	elseif ESX.UI.Menu.IsOpen('default', 'esx_policejob', 'object_spawner') then
+		ESX.UI.Menu.Close('default', 'esx_policejob', 'object_spawner')
+	end
+end)
+
+-- Ambulance
+RegisterNetEvent('NB:closeMenuAmbulance')
+AddEventHandler('NB:closeMenuAmbulance', function()
+	if ESX.UI.Menu.IsOpen('default', 'esx_ambulancejob', 'citizen_interaction') then
+		ESX.UI.Menu.Close('default', 'esx_ambulancejob', 'citizen_interaction')
+	end
+end)
+
+-- Mecano
+RegisterNetEvent('NB:closeMenuMecano')
+AddEventHandler('NB:closeMenuMecano', function()
+	if ESX.UI.Menu.IsOpen('default', 'esx_mecanojob', 'citizen_interaction') then
+		ESX.UI.Menu.Close('default', 'esx_mecanojob', 'citizen_interaction')
+	end
+end)
+
+--------------------------------------------------------------------------------------------
 -- Pause menu Cache L'HUD et ferme les menu
+--------------------------------------------------------------------------------------------
 Citizen.CreateThread(function()
 	while true do
 		Citizen.Wait(1)

@@ -1640,38 +1640,3 @@ RegisterNetEvent('NB:openMenuPersonnel')
 AddEventHandler('NB:openMenuPersonnel', function()
 	OpenPersonnelMenu()
 end)
-
-RegisterNetEvent('NB:closeMenuPersonnel')
-AddEventHandler('NB:closeMenuPersonnel', function()
-
-	if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_moi') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_moi')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions') then
-		if ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Salute') then
-			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Salute')
-		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Humor') then
-			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Humor')
-		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Travail') then
-			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Travail')
-		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Festives') then
-			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Festives')
-		elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_actions_Others') then
-			ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions_Others')
-		end
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_actions')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_vehicule') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_vehicule')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_gpsrapide') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_gpsrapide')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_grade') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_grade')
-		
-	elseif ESX.UI.Menu.IsOpen('default', GetCurrentResourceName(), 'menuperso_modo') then
-		ESX.UI.Menu.Close('default', GetCurrentResourceName(), 'menuperso_modo')
-		
-	end
-end)
