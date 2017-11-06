@@ -510,5 +510,6 @@ Citizen.CreateThread(function()
 				SendNUIMessage({type = "click"})
 			end
 		end
+			break
 	end
 end)
